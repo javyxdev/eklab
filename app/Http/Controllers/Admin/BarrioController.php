@@ -28,7 +28,7 @@ class BarrioController extends Controller
      */
     public function create()
     {
-        $departamentos = Departamento::all()->pluck('descripcion','id');
+        $departamentos = Departamento::all();
         return view('admin.barrios.create',compact('departamentos'));
     }
 
@@ -40,6 +40,13 @@ class BarrioController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'municipio_id' => 'required',
+            'descripcion' => 'required',
+        ]);
+        $mensaje = 'El registro se guardó con éxito.';
+        $barrio = Barrio::create($request->all());
+        return redirect()->route('admin.barrios.edit',compact('barrio'))->with('info',$mensaje);
 
     }
 
@@ -60,9 +67,10 @@ class BarrioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Barrio $barrio)
     {
-        //
+        $municipios = Municipio::all()->pluck('descripcion','id');
+        return view('admin.barrios.edit',compact('barrio','municipios'));
     }
 
     /**
@@ -72,9 +80,15 @@ class BarrioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Barrio $barrio)
     {
-        //
+        $request->validate([
+            'municipio_id' => 'required',
+            'descripcion' => 'required',
+        ]);
+        $mensaje = 'El registro se guardó con éxito.';
+        $barrio->update($request->all());
+        return redirect()->route('admin.barrios.edit',compact('barrio'))->with('info',$mensaje);
     }
 
     /**
@@ -86,5 +100,17 @@ class BarrioController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function ajaxDelete($id){
+        $barrio = Barrio::Find($id);
+        $barrio->delete();
+        return  "Se ha eliminado correctamente el registro número: ".$id;
+    }
+
+    public function getMunicipiosByDepartamento($id){
+        $departamento = Departamento::Find($id);
+        $municipios = $departamento->municipios()->get();
+        return compact('municipios');
     }
 }

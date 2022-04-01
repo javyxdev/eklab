@@ -31,14 +31,12 @@ class PacienteController extends Controller
     public function create()
     {
         $departamentos = Departamento::all()->pluck('descripcion','id');
-        $municipios = Municipio::all()->pluck('descripcion','id');
-        $barrios = Barrio::all()->pluck('descripcion','id');
         $genero = array(
             "M" => "MASCULINO",
             "F" => "FEMENINO"
         );
 
-        return view('admin.pacientes.create', compact('departamentos','municipios','barrios','genero'));
+        return view('admin.pacientes.create', compact('departamentos','genero'));
     }
 
     /**
@@ -125,5 +123,23 @@ class PacienteController extends Controller
     {
         $paciente->delete();
         return redirect()->route('admin.pacientes.index')->with('info','El paciente se eliminó con éxito.');
+    }
+
+    public function ajaxDelete($id){
+        $paciente = Paciente::Find($id);
+        $paciente->delete();
+        return  "Se ha eliminado correctamente el registro número: ".$id;
+    }
+
+    public function getMunicipiosByDepartamento($id){
+        $departamento = Departamento::Find($id);
+        $municipios = $departamento->municipios()->get();
+        return compact('municipios');
+    }
+
+    public function getBarriosByMunicipio($id){
+        $municipio = Municipio::Find($id);
+        $barrios = $municipio->barrios()->get();
+        return compact('barrios');
     }
 }

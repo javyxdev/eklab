@@ -97,6 +97,8 @@ class Categoria_ExamensController extends Controller
     }
 
     public function ajaxDelete($id){
-        return  "Este es un borrado con Ajax ".$id;
+        $categoria_examen = Categoria_Examen::Find($id);
+        $categoria_examen->delete();
+        return  "Se ha eliminado correctamente el registro número: ".$id;
     }
 }

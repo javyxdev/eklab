@@ -312,23 +312,25 @@ return [
             ],
         ],*/
         ['header' => 'Ubicaciones'],
-        [
+        /*[
             'text'       => 'Departamentos',
-            'icon' => 'fas fa-fw fa-map-marked',
-            'icon_color' => 'red',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'Municipios',
-            'icon' => 'fas fa-fw fa-map-marked',
-            'icon_color' => 'yellow',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'Barrios',
             'icon' => 'fas fa-fw fa-map-marked',
             'icon_color' => 'cyan',
             'url'        => '#',
+        ],*/
+        [
+            'text'       => 'Municipios',
+            'icon' => 'fas fa-fw fa-map-marked',
+            'icon_color' => 'red',
+            'route'        => 'admin.municipios.index',
+            'active' => ['admin/municipios*'],
+        ],
+        [
+            'text'       => 'Barrios / Colonias',
+            'icon' => 'fas fa-fw fa-map-marked',
+            'icon_color' => 'yellow',
+            'route'        => 'admin.barrios.index',
+            'active' => ['admin/barrios*'],
         ],
     ],
 
@@ -388,7 +390,7 @@ return [
             ],
         ],
         'Select2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',

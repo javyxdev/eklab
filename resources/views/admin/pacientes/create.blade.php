@@ -19,4 +19,58 @@
     </div>
 @stop
 
+@section('js')
+    <script>
+        $('#departamento_id').change(function(){
+            var id = $("#departamento_id option:selected").val();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url:'getMunicipiosByDepartamento/'+id,
+                type:'get',
+                success: function (response) {
+                    $("#municipio_id").empty();
+                    $("#barrio_id").empty();
+                    $("#municipio_id").append(new Option('Seleccione un Municipio','')).attr('selected',true);
+                    $("#barrio_id").append(new Option('Seleccione un Barrio','')).attr('selected',true);
+                    $.each(response.municipios, function () {
+                        $("#municipio_id").append(new Option(this.descripcion, this.id));
+                    });
+
+                },
+                error: function (xhr, status) {
+                    swal.fire("Error", xhr.responseText, "error");
+                }
+            });
+        });
+
+        $('#municipio_id').change(function(){
+            var id = $("#municipio_id option:selected").val();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url:'getBarriosByMunicipio/'+id,
+                type:'get',
+                success: function (response) {
+                    $("#barrio_id").empty();
+                    $("#barrio_id").append(new Option('Seleccione un Barrio','')).attr('selected',true);
+                    $.each(response.barrios, function () {
+                        $("#barrio_id").append(new Option(this.descripcion, this.id));
+                    });
+
+                },
+                error: function (xhr, status) {
+                    swal.fire("Error", xhr.responseText, "error");
+                }
+            });
+        })
+    </script>
+@stop
+
 

@@ -61,10 +61,10 @@
 
 <div class="form-group">
     {!! Form::label('municipio_id','MUNICIPIO:') !!}
-    {!! Form::select('municipio_id', $municipios, null, ['class' => 'form-control', 'placeholder' => 'Seleccione un Municipio']) !!}
+    {!! Form::select('municipio_id',[], null, ['class' => 'form-control', 'placeholder' => 'Seleccione un Municipio']) !!}
 </div>
 
 <div class="form-group">
-    {!! Form::label('barrio_id','BARRIO:') !!}
-    {!! Form::select('barrio_id', $barrios, null, ['class' => 'form-control', 'placeholder' => 'Seleccione un Barrio']) !!}
+    {!! Form::label('barrio_id','BARRIO / COLONIA:') !!}
+    {!! Form::select('barrio_id', [], null, ['class' => 'form-control', 'placeholder' => 'Seleccione un Barrio']) !!}
 </div>
