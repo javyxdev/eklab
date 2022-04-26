@@ -22,5 +22,40 @@
             {!! Form::close([]) !!}
         </div>
     </div>
-
 @stop
+
+@section('js')
+    <script>
+        $(document).ready(function(){
+            var fechaNacimiento = $('#fecha_nacimiento').val();
+            if(fechaNacimiento !== ''){
+                var edad = getEdad(fechaNacimiento);
+                $('#edad').val(edad);
+            }else{
+                $('#edad').val('');
+            }
+        });
+
+        /** Calculo de edad a partir del cambio en la fecha de nacimiento */
+        $('#fecha_nacimiento').change(function(){
+            var edad = getEdad($(this).val());
+            $('#edad').val(edad);
+        });
+
+        /** Función para cálculo de edad */
+        function getEdad(dateString) {
+            let hoy = new Date()
+            let fechaNacimiento = new Date(dateString)
+            let edad = hoy.getFullYear() - fechaNacimiento.getFullYear()
+            let diferenciaMeses = hoy.getMonth() - fechaNacimiento.getMonth()
+            if (
+                diferenciaMeses < 0 ||
+                (diferenciaMeses === 0 && hoy.getDate() < fechaNacimiento.getDate())
+            ) {
+                edad--
+            }
+            return edad
+        }
+    </script>
+@stop
+

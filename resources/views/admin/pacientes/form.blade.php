@@ -23,16 +23,24 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('fecha_nacimiento','FECHA NACIMIENTO:') !!}
-    {!! Form::date('fecha_nacimiento', null, ['class' => 'form-control col-2']) !!}
-    @error('fecha_nacimiento')
-    <small class="text-danger">{{$message}}</small>
-    @enderror
+    <div class="row">
+        <div class="col-2">
+            {!! Form::label('fecha_nacimiento','FECHA NACIMIENTO:') !!}
+            {!! Form::date('fecha_nacimiento', null, ['class' => 'form-control']) !!}
+            @error('fecha_nacimiento')
+            <small class="text-danger">{{$message}}</small>
+            @enderror
+        </div>
+        <div class="col-2">
+            <label for="edad">EDAD:</label>
+            <input type="text" id="edad" class="form-control" disabled>
+        </div>
+    </div>
 </div>
 
 <div class="form-group">
     {!! Form::label('dui','DUI (Dejar vacío en caso de ser menor de edad):') !!}
-    {!! Form::number('dui', null, ['class' => 'form-control col-2', 'placeholder' => '00000000-0']) !!}
+    {!! Form::text('dui', null, ['class' => 'form-control col-2', 'placeholder' => '00000000-0', 'pattern' => '[0-9]+' ,'maxlength' => '9']) !!}
     @error('dui')
     <small class="text-danger">{{$message}}</small>
     @enderror
@@ -61,10 +69,10 @@
 
 <div class="form-group">
     {!! Form::label('municipio_id','MUNICIPIO:') !!}
-    {!! Form::select('municipio_id',[], null, ['class' => 'form-control', 'placeholder' => 'Seleccione un Municipio']) !!}
+    {!! Form::select('municipio_id',$municipios, null, ['class' => 'form-control', 'placeholder' => 'Seleccione un Municipio']) !!}
 </div>
 
 <div class="form-group">
     {!! Form::label('barrio_id','BARRIO / COLONIA:') !!}
-    {!! Form::select('barrio_id', [], null, ['class' => 'form-control', 'placeholder' => 'Seleccione un Barrio']) !!}
+    {!! Form::select('barrio_id', $barrios, null, ['class' => 'form-control', 'placeholder' => 'Seleccione un Barrio']) !!}
 </div>

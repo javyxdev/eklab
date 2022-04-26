@@ -262,12 +262,20 @@ return [
         ],
         [
             'text' => 'Ordenes de Examenes',
-            'url'  => 'admin/settings',
+            'route'  => 'admin.ordens.index',
             'icon' => 'fas fa-fw fa-clipboard-list',
-            'icon_color' => 'blue',
+            'icon_color' => 'pink',
+            'active' => ['admin/ordens*'],
         ],
         [
             'text' => 'Categorias de Examen',
+            'route'  => 'admin.categoria_examens.index',
+            'icon' => 'fas fa-fw fa-vials',
+            'icon_color' => 'cyan',
+            'active' => ['admin/categoria_examens*'],
+        ],
+        [
+            'text' => 'Mant. de Examenes',
             'route'  => 'admin.categoria_examens.index',
             'icon' => 'fas fa-fw fa-vials',
             'icon_color' => 'cyan',

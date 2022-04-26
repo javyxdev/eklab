@@ -26,7 +26,7 @@
                         <th>APELLIDO</th>
                         <th>DUI</th>
                         <th>FECHA NAC.</th>
-                        <th>EMAIL</th>
+                        <th>FECHA REGISTRO</th>
                         <th>TELEFONO</th>
                         <th>BARRIO</th>
                         <th>Editar</th>
@@ -41,16 +41,20 @@
                             <td>{{$paciente->apellido}}</td>
                             <td>{{$paciente->dui}}</td>
                             <td width="20px">{{$paciente->fecha_nacimiento}}</td>
-                            <td>{{$paciente->email}}</td>
+                            <td>{{$paciente->created_at}}</td>
                             <td>{{$paciente->telefono}}</td>
-                            <td>{{$paciente->barrio->descripcion}}</td>
-                            <td>
+                            <td>@if($paciente->barrio != null)
+                                    {{$paciente->barrio->descripcion}}
+                                @else N/A
+                                @endif
+                            </td>
+                            <td width="75px">
                                 <a class="btn btn-success btn-sm" href="{{route('admin.pacientes.edit', $paciente)}}">
                                     <i class="fa fa-pen fa-sm fa-fw"></i>
                                     <small>EDITAR</small>
                                 </a>
                             </td>
-                            <td>
+                            <td width="95px">
                                 <button class="btn btn-danger btn-sm" onclick="eliminarRegistro({{$paciente->id}})">
                                     <i class="fa fa-trash-alt fa-sm fa-fw"></i>
                                     <small>ELIMINAR</small>
@@ -77,7 +81,9 @@
 
 @section('js')
     <script>
-        $('#pacientesTable').DataTable();
+        $('#pacientesTable').DataTable({
+            "order": [5,'desc']
+        });
         function eliminarRegistro(id){
             $.ajaxSetup({
                 headers: {

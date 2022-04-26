@@ -21,5 +21,10 @@ class Examen extends Model
         return $this->belongsTo(Categoria_Examen::class);
     }
 
+    /** Accesor para concatenar nombre y precio al examen */
+    public function getExamenPrecioAttribute(){
+        return $this->descripcion . ' - $' . $this->precio;
+    }
+
 
 }

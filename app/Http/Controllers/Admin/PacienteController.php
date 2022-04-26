@@ -18,7 +18,7 @@ class PacienteController extends Controller
      */
     public function index()
     {
-        $pacientes = Paciente::all();
+        $pacientes = Paciente::all()->sortByDesc('created_at');
 
         return view('admin.pacientes.index', compact('pacientes'));
     }
@@ -31,12 +31,14 @@ class PacienteController extends Controller
     public function create()
     {
         $departamentos = Departamento::all()->pluck('descripcion','id');
+        $municipios = array();
+        $barrios = array();
         $genero = array(
             "M" => "MASCULINO",
             "F" => "FEMENINO"
         );
 
-        return view('admin.pacientes.create', compact('departamentos','genero'));
+        return view('admin.pacientes.create', compact('departamentos','municipios','barrios','genero'));
     }
 
     /**
