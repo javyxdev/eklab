@@ -1,4 +1,5 @@
 <div class="card">
+    <div class="card-header">Estadísticas Rápidas</div>
     <div class="card-body">
         <div class="row">
             <div class="col-3">

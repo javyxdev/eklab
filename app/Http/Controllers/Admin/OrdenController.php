@@ -19,9 +19,10 @@ class OrdenController extends Controller
      */
     public function index()
     {
-        $today = getdate();
-        $ordens = Orden::whereDate('created_at',Carbon::today())->get();
-        return view('admin.ordens.index',compact('ordens'));
+        $today = Carbon::today();
+        $ordens = Orden::whereDate('created_at',$today)->get();
+        $today = $today->format('d-m-Y');
+        return view('admin.ordens.index',compact('ordens','today'));
     }
 
     /**

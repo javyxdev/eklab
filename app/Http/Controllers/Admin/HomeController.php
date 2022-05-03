@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Categoria_Examen;
+use App\Models\Categoria_examen;
 use App\Models\Deta_orden;
 use App\Models\Orden;
 use App\Models\Paciente;
@@ -15,7 +15,7 @@ class HomeController extends Controller
     public function index()
     {
         $loggeduser = Auth::user()->name;
-        $categoriasCount = Categoria_Examen::all()->count();
+        $categoriasCount = Categoria_examen::all()->count();
         $pacientesCount = Paciente::all()->count();
         $ordensCount = Orden::all()->count();
         $detaOrdenCount = Deta_orden::all()->count();

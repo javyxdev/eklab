@@ -16,9 +16,25 @@ class Examen extends Model
         return $this->hasMany(Deta_orden::class);
     }
 
+    public function exm_heces_plantillas(){
+        return $this->hasMany(Exm_heces_plantilla::class);
+    }
+
+    public function exm_hemograma_plantillas(){
+        return $this->hasMany(Exm_hemograma_plantilla::class);
+    }
+
+    public function exm_orina_plantillas(){
+        return $this->hasMany(Exm_orina_plantilla::class);
+    }
+
+    public function exm_quimica_plantillas(){
+        return $this->hasMany(Exm_quimica_plantilla::class);
+    }
+
     //Relaciones Many To One
-    public function Categoria_Examen(){
-        return $this->belongsTo(Categoria_Examen::class);
+    public function Categoria_examen(){
+        return $this->belongsTo(Categoria_examen::class);
     }
 
     /** Accesor para concatenar nombre y precio al examen */

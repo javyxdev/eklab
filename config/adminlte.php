@@ -252,7 +252,7 @@ return [
             'icon'        => 'fa fa-flask fa-fw',
             'icon_color' => 'orange',
         ],
-        ['header' => 'Panel Administrativo'],
+        ['header' => 'Panel de Trabajo'],
         [
             'text' => 'Pacientes',
             'route'  => 'admin.pacientes.index',
@@ -261,7 +261,7 @@ return [
             'active' => ['admin/pacientes*'],
         ],
         [
-            'text' => 'Ordenes de Examenes',
+            'text' => 'Ordenes Diarias',
             'route'  => 'admin.ordens.index',
             'icon' => 'fas fa-fw fa-clipboard-list',
             'icon_color' => 'pink',
@@ -276,10 +276,10 @@ return [
         ],
         [
             'text' => 'Mant. de Examenes',
-            'route'  => 'admin.categoria_examens.index',
-            'icon' => 'fas fa-fw fa-vials',
-            'icon_color' => 'cyan',
-            'active' => ['admin/categoria_examens*'],
+            'route'  => 'admin.examens.index',
+            'icon' => 'fas fa-fw fa-vial',
+            'icon_color' => 'yellow',
+            'active' => ['admin/examens*'],
         ],
         /*[
             'text'    => 'multilevel',

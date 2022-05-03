@@ -3,8 +3,8 @@
 @section('title', 'EK Diagnostico')
 
 @section('content_header')
-    <h1><i class="fa fa-vials"></i> Categorias de Examen</h1>
-    <p>Listado de clasificaciones de examenes disponibles.</p>
+    <h1><i class="fa fa-vial"></i> Mantenimiento de Examenes</h1>
+    <p>Listado de examenes individuales disponibles.</p>
 @stop
 
 @section('content')
@@ -15,42 +15,41 @@
     @endif
     <div class="card">
         <div class="card-header">
-            <a class="btn btn-primary" href="{{route('admin.categoria_examens.create')}}"><i class="fa fa-plus-circle fa-fw"></i> NUEVA CATEGORÍA</a>
+            <a class="btn btn-primary" href="{{route('admin.examens.create')}}"><i class="fa fa-vial fa-fw"></i> NUEVO EXAMEN</a>
         </div>
         <div class="card-body">
-            <table id="categoriaExamensTable" class="table table-striped">
+            <table id="examensTable" class="table table-striped">
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>NOMBRE DE CATEGORIA</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
+                    <th>NOMBRE DEL EXAMEN</th>
+                    <th>CATEGORIA / AREA</th>
+                    <th>PRECIO</th>
+                    <th>PLANTILLA</th>
+                    <th>EDITAR</th>
+                    <th>ELIMINAR</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($categorias as $categoria_examen)
+                @foreach($examenes as $examen)
                     <tr>
-                        <td>{{$categoria_examen->id}}</td>
-                        <td>{{$categoria_examen->descripcion}}</td>
+                        <td>{{$examen->id}}</td>
+                        <td>{{$examen->descripcion}}</td>
+                        <td>{{$examen->categoria_examen->descripcion}}</td>
+                        <td>${{$examen->precio}}</td>
+                        <td>{{$examen->plantilla}}</td>
                         <td width="75px">
-                            <a class="btn btn-success btn-sm" href="{{route('admin.categoria_examens.edit', $categoria_examen)}}">
+                            <a class="btn btn-success btn-sm" href="{{route('admin.examens.edit', $examen)}}">
                                 <i class="fa fa-pen fa-sm fa-fw"></i>
                                 <small>EDITAR</small>
                             </a>
                         </td>
                         <td width="90px">
-                            <button class="btn btn-danger btn-sm" onclick="eliminarRegistro({{$categoria_examen->id}})">
+                            <button class="btn btn-danger btn-sm" onclick="eliminarRegistro({{$examen->id}})">
                                 <i class="fa fa-trash-alt fa-sm fa-fw"></i>
                                 <small>ELIMINAR</small>
                             </button>
                         </td>
-                        <!--<td width="10px">
-                            <form action="{{route('admin.categoria_examens.destroy', $categoria_examen)}}" method="POST">
-                                @method('delete')
-                                @csrf
-                                <button type="submit" class="btn btn-danger btn-sm">ELIMINAR</button>
-                            </form>
-                        </td>-->
                     </tr>
                 @endforeach
                 </tbody>
@@ -65,7 +64,7 @@
 
 @section('js')
     <script>
-        $('#categoriaExamensTable').DataTable();
+        $('#examensTable').DataTable();
 
         function eliminarRegistro(id){
             $.ajaxSetup({
@@ -108,3 +107,4 @@
 
     </script>
 @stop
+

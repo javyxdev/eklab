@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('examens', function (Blueprint $table) {
+        Schema::create('exm_quimica_plantillas', function (Blueprint $table) {
             $table->id();
-            $table->string('descripcion',200);
-            $table->decimal('precio',8,2,true);
-            $table->string('plantilla',25);
-            $table->unsignedBigInteger('categoria_examen_id');
-
-            $table->foreign('categoria_examen_id')->references('id')->on('categoria_examens')->onDelete('restrict');
-
+            $table->string('prueba',50);
+            $table->string('resultado',75);
+            $table->string('observaciones',300);
+            $table->unsignedBigInteger('examen_id');
+            $table->foreign('examen_id')->references('id')->on('examens')->onDelete('restrict');
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('examens');
+        Schema::dropIfExists('exm_quimica_plantillas');
     }
 };

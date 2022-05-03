@@ -17,45 +17,48 @@ class MunicipioSeeder extends Seeder
     {
         $municipio = new Municipio();
         $municipio->descripcion = 'CHALATENANGO';
-        $municipio->departamento_id = 2;
+        $municipio->departamento_id = 1;
         $municipio->save();
 
         $municipio2 = new Municipio();
         $municipio2->descripcion = 'CONCEPCION QUEZALTEPEQUE';
-        $municipio2->departamento_id = 2;
+        $municipio2->departamento_id = 1;
         $municipio2->save();
 
         $municipio3 = new Municipio();
         $municipio3->descripcion = 'LA REINA';
-        $municipio3->departamento_id = 2;
+        $municipio3->departamento_id = 1;
         $municipio3->save();
 
         $municipio4 = new Municipio();
         $municipio4->descripcion = 'OJOS DE AGUA';
-        $municipio4->departamento_id = 2;
+        $municipio4->departamento_id = 1;
         $municipio4->save();
 
         $municipio5 = new Municipio();
         $municipio5->descripcion = 'NUEVA CONCEPCION';
-        $municipio5->departamento_id = 2;
+        $municipio5->departamento_id = 1;
         $municipio5->save();
 
         $municipio6 = new Municipio();
         $municipio6->descripcion = 'AGUA CALIENTE';
-        $municipio6->departamento_id = 2;
+        $municipio6->departamento_id = 1;
         $municipio6->save();
 
         $municipio7 = new Municipio();
         $municipio7->descripcion = 'OJOS DE AGUA';
-        $municipio7->departamento_id = 2;
+        $municipio7->departamento_id = 1;
         $municipio7->save();
 
         $municipio8 = new Municipio();
         $municipio8->descripcion = 'SAN SALVADOR';
-        $municipio8->departamento_id = 3;
+        $municipio8->departamento_id = 2;
         $municipio8->save();
 
-
+        $municipio8 = new Municipio();
+        $municipio8->descripcion = 'SANTA TECLA';
+        $municipio8->departamento_id = 3;
+        $municipio8->save();
 
     }
 }

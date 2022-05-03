@@ -24,6 +24,7 @@ Route::post('categoriaExamensDelete/{id}',[Categoria_ExamensController::class,'a
 Route::post('pacientesDelete/{id}',[PacienteController::class,'ajaxDelete']);
 Route::post('municipiosDelete/{id}',[MunicipioController::class,'ajaxDelete']);
 Route::post('barriosDelete/{id}',[BarrioController::class,'ajaxDelete']);
+Route::post('examensDelete/{id}',[ExamenController::class,'ajaxDelete']);
 
 /** Rutas internas de dropdowns asíncronos dependientes */
 Route::get('pacientes/getMunicipiosByDepartamento/{id}',[PacienteController::class,'getMunicipiosByDepartamento']);

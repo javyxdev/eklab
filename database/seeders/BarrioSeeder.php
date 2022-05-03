@@ -16,42 +16,42 @@ class BarrioSeeder extends Seeder
     public function run()
     {
         $barrio = new Barrio();
-        $barrio->descripcion = 'Bo. EL CALVARIO';
+        $barrio->descripcion = 'EL CALVARIO';
         $barrio->municipio_id = 1;
         $barrio->save();
 
         $barrio = new Barrio();
-        $barrio->descripcion = 'Bo. EL CHILE';
+        $barrio->descripcion = 'EL CHILE';
         $barrio->municipio_id = 1;
         $barrio->save();
 
         $barrio = new Barrio();
-        $barrio->descripcion = 'Bo. LA SIERPE';
+        $barrio->descripcion = 'LA SIERPE';
         $barrio->municipio_id = 1;
         $barrio->save();
 
         $barrio = new Barrio();
-        $barrio->descripcion = 'Bo. FATIMA';
+        $barrio->descripcion = 'FATIMA';
         $barrio->municipio_id = 1;
         $barrio->save();
 
         $barrio = new Barrio();
-        $barrio->descripcion = 'Bo. EL CENTRO';
+        $barrio->descripcion = 'EL CENTRO';
         $barrio->municipio_id = 1;
         $barrio->save();
 
         $barrio = new Barrio();
-        $barrio->descripcion = 'Bo. CAJA DE AGUA';
+        $barrio->descripcion = 'CAJA DE AGUA';
         $barrio->municipio_id = 1;
         $barrio->save();
 
         $barrio = new Barrio();
-        $barrio->descripcion = 'Bo. JOYA LENCA';
+        $barrio->descripcion = 'JOYA LENCA';
         $barrio->municipio_id = 1;
         $barrio->save();
 
         $barrio = new Barrio();
-        $barrio->descripcion = 'Bo. SAN ANTONIO';
+        $barrio->descripcion = 'SAN ANTONIO';
         $barrio->municipio_id = 1;
         $barrio->save();
     }

@@ -4,7 +4,7 @@
 
 @section('content_header')
     <h1><i class="fa fa-clipboard-list"></i> Gesti&oacute;n de Ordenes de Examenes</h1>
-    <p>Listado general de ordenes de examenes.</p>
+    <p>Listado diario de ordenes de examenes.</p>
 @stop
 
 @section('content')
@@ -18,6 +18,9 @@
             <a class="btn btn-primary" href="{{route('admin.ordens.create')}}"><i class="fa fa-plus-circle fa-fw"></i> GENERAR NUEVA ORDEN</a>
         </div>
         <div class="card-body">
+            <small>&Oacute;rdenes para este dia: {{$today}}</small>
+            <br>
+            <br>
             <table id="ordensTable" class="table table-striped">
                 <thead>
                 <tr>
