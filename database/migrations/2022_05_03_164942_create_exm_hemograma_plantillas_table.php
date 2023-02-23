@@ -15,22 +15,23 @@ return new class extends Migration
     {
         Schema::create('exm_hemograma_plantillas', function (Blueprint $table) {
             $table->id();
-            $table->string('globulos_rojos',25);
-            $table->string('hemoglobina',25);
-            $table->string('hematocrito',25);
-            $table->string('vcm',25);
-            $table->string('hcm',25);
-            $table->string('chcm',25);
-            $table->string('leucocitos',25);
-            $table->string('neutrofilos_segmentados',25);
-            $table->string('neutrofilos_en_banda',25);
-            $table->string('linfocitos',25);
-            $table->string('monocitos',25);
-            $table->string('eosinofilos',25);
-            $table->string('basofilos',25);
-            $table->string('recuento_plaquetas',25);
-            $table->string('observaciones',300);
+            $table->string('globulos_rojos',25)->nullable();
+            $table->string('hemoglobina',25)->nullable();
+            $table->string('hematocrito',25)->nullable();
+            $table->string('vcm',25)->nullable();
+            $table->string('hcm',25)->nullable();
+            $table->string('chcm',25)->nullable();
+            $table->string('leucocitos',25)->nullable();
+            $table->string('neutrofilos_segmentados',25)->nullable();
+            $table->string('neutrofilos_en_banda',25)->nullable();
+            $table->string('linfocitos',25)->nullable();
+            $table->string('monocitos',25)->nullable();
+            $table->string('eosinofilos',25)->nullable();
+            $table->string('basofilos',25)->nullable();
+            $table->string('recuento_plaquetas',25)->nullable();
+            $table->string('observaciones',300)->nullable();
             $table->unsignedBigInteger('examen_id');
+            $table->unsignedBigInteger('deta_orden_id');
             $table->foreign('examen_id')->references('id')->on('examens')->onDelete('restrict');
             $table->timestamps();
         });

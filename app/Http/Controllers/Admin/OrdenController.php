@@ -20,7 +20,8 @@ class OrdenController extends Controller
     public function index()
     {
         $today = Carbon::today();
-        $ordens = Orden::whereDate('created_at',$today)->get();
+        //$ordens = Orden::whereDate('created_at',$today)->get();
+        $ordens = Orden::all();
         $today = $today->format('d-m-Y');
         return view('admin.ordens.index',compact('ordens','today'));
     }
@@ -67,8 +68,24 @@ class OrdenController extends Controller
      */
     public function edit(Orden $orden)
     {
+        $colores = array(
+            "AMARILLO" => "AMARILLO",
+            "CAFÉ" => "CAFÉ",
+            "NEGRO" => "NEGRO",
+            "VERDE" => "VERDE",
+        );
+        $consistencias = array(
+            "PASTOSA" => "PASTOSA",
+            "LIQUIDA" => "LIQUIDA",
+            "DURA" => "DURA",
+        );
+        $aspectos = array(
+            "TURBIO" => "TURBIO",
+            "LIMPIO" => "LIMPIO",
+            "ESPESO" => "ESPESO",
+        );
         $detalleOrdens = Deta_orden::all()->where('orden_id',$orden->id);
-        return view('admin.ordens.complete',compact('orden','detalleOrdens'));
+        return view('admin.ordens.complete',compact('orden','detalleOrdens','colores','consistencias','aspectos'));
     }
 
     /**
@@ -125,6 +142,7 @@ class OrdenController extends Controller
         $idExamens = (array) $request->idExamens;
         foreach ($idExamens as $item){
             $detaOrden = new Deta_orden();
+            $detaOrden->completado = 0;
             $detaOrden->orden_id = $orden->id;
             $detaOrden->examen_id = $item;
 
@@ -143,6 +161,20 @@ class OrdenController extends Controller
         }else{
             $mensaje = "1|¡Error!|No es posible anular una orden COMPLETADA o ANULADA. ";
         }
+        return $mensaje;
+    }
+
+    public function finalizarOrden($id){
+        $orden = Orden::Find($id);
+        $mensaje = "0|¡Finalizada!|Se ha finalizado correctamente la orden de examen con número: ".$id;
+        $deta_ordens = $orden->deta_ordens;
+        foreach ($deta_ordens as $item){
+            if($item->completado == 0){
+                return "1|¡Error!|No es posible finalizar una orden con examenes pendientes de completar.";
+            }
+        }
+        $orden->estado = "COMPLETADA";
+        $orden->update();
         return $mensaje;
     }
 }

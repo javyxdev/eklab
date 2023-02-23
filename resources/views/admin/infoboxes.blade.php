@@ -10,10 +10,13 @@
                         <span class="info-box-number">{{$ordensCount}}</span>
                         <!-- The progress section is optional -->
                         <div class="progress">
-                            <div class="progress-bar" style="width: 25%"></div>
+                            <div class="progress-bar" style="width: 100%"></div>
                         </div>
                         <span class="progress-description">
-                            25% Increase in 30 Days
+                            <a class="btn btn-primary btn-sm" href="{{route('admin.ordens.index')}}">
+                                <i class="fa fa-arrow-alt-circle-left fa-sm fa-fw"></i>
+                                IR A GESTION ORDENES
+                            </a>
                         </span>
                     </div><!-- /.info-box-content -->
                 </div><!-- /.info-box -->
@@ -26,10 +29,13 @@
                         <span class="info-box-number">{{$pacientesCount}}</span>
                         <!-- The progress section is optional -->
                         <div class="progress">
-                            <div class="progress-bar" style="width: 89%"></div>
+                            <div class="progress-bar" style="width: 100%"></div>
                         </div>
                         <span class="progress-description">
-                            89% Increase in 30 Days
+                             <a class="btn btn-success btn-sm" href="{{route('admin.pacientes.index')}}">
+                                <i class="fa fa-arrow-alt-circle-left fa-sm fa-fw"></i>
+                                VER PACIENTES
+                            </a>
                         </span>
                     </div><!-- /.info-box-content -->
                 </div><!-- /.info-box -->
@@ -42,10 +48,13 @@
                         <span class="info-box-number">{{$detaOrdenCount}}</span>
                         <!-- The progress section is optional -->
                         <div class="progress">
-                            <div class="progress-bar" style="width: 50%"></div>
+                            <div class="progress-bar" style="width: 100%"></div>
                         </div>
                         <span class="progress-description">
-                            50% Increase in 30 Days
+                             <a class="btn btn-sm" href="{{route('admin.examens.index')}}">
+                                <i class="fa fa-arrow-alt-circle-left fa-sm fa-fw"></i>
+                                CATALOGO EXAMENES
+                            </a>
                         </span>
                     </div><!-- /.info-box-content -->
                 </div><!-- /.info-box -->
@@ -58,10 +67,13 @@
                         <span class="info-box-number">{{$categoriasCount}}</span>
                         <!-- The progress section is optional -->
                         <div class="progress">
-                            <div class="progress-bar" style="width: 70%"></div>
+                            <div class="progress-bar" style="width: 100%"></div>
                         </div>
                         <span class="progress-description">
-                            70% Increase in 30 Days
+                            <a class="btn btn-sm" href="{{route('admin.categoria_examens.index')}}">
+                                <i class="fa fa-arrow-alt-circle-left fa-sm fa-fw"></i>
+                                CATEGORIAS DE EXAMEN
+                            </a>
                         </span>
                     </div><!-- /.info-box-content -->
                 </div><!-- /.info-box -->

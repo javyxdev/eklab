@@ -33,8 +33,10 @@ class ExamenController extends Controller
             "EGH" => "EXAMEN GENERAL HECES",
             "EGO" => "EXAMEN GENERAL ORINA",
             "HMG" => "HEMOGRAMA",
-            "QMV" => "QUIMICA / VARIOS"
+            "QMV" => "QUIMICA / VARIOS",
+            "GEN" => "PLANTILLA GENERICA"
         );
+
         return view('admin.examens.create',compact('cat_examens','plantillas'));
     }
 
@@ -50,7 +52,7 @@ class ExamenController extends Controller
             'categoria_examen_id' => 'required',
             'descripcion' => 'required',
             'precio' => 'required|numeric',
-            'plantilla' => 'required',
+            'plantilla' => 'required'
         ]);
         $mensaje = 'El registro se guardó con éxito.';
         $examen = Examen::create($request->all());
@@ -81,8 +83,10 @@ class ExamenController extends Controller
             "EGH" => "EXAMEN GENERAL HECES",
             "EGO" => "EXAMEN GENERAL ORINA",
             "HMG" => "HEMOGRAMA",
-            "QMV" => "QUIMICA / VARIOS"
+            "QMV" => "QUIMICA / VARIOS",
+            "GEN" => "PLANTILLA GENERICA"
         );
+
         return view('admin.examens.edit',compact('cat_examens','plantillas','examen'));
     }
 

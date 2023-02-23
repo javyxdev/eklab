@@ -3,8 +3,8 @@
 @section('title', 'EK Diagnostico')
 
 @section('content_header')
-    <h1><i class="fa fa-clipboard-list"></i> Gesti&oacute;n de Ordenes de Examenes</h1>
-    <p>Listado diario de ordenes de examenes.</p>
+    <h1><i class="fa fa-clipboard-list"></i> Monitor de Ordenes de Examenes</h1>
+    <p>Listado global de ordenes de examenes.</p>
 @stop
 
 @section('content')
@@ -18,9 +18,6 @@
             <a class="btn btn-primary" href="{{route('admin.ordens.create')}}"><i class="fa fa-plus-circle fa-fw"></i> GENERAR NUEVA ORDEN</a>
         </div>
         <div class="card-body">
-            <small>&Oacute;rdenes para este dia: {{$today}}</small>
-            <br>
-            <br>
             <table id="ordensTable" class="table table-striped">
                 <thead>
                 <tr>
@@ -30,7 +27,7 @@
                     <th>FECHA ORDEN</th>
                     <th>ESTADO ORDEN</th>
                     <th>TOTAL</th>
-                    <th>COMPLETAR</th>
+                    <th>CONSULTAR</th>
                     <th>ANULAR</th>
                 </tr>
                 </thead>
@@ -71,7 +68,7 @@
     <script>
         $(document).ready(function() {
             var t = $('#ordensTable').DataTable();
-            //Para crear columna de correlativo (no ID) en la tabla.
+
             t.on( 'order.dt search.dt', function () {
                 let i = 1;
                 t.cells(null, 0, {search:'applied', order:'applied'}).every( function (cell) {
@@ -105,11 +102,11 @@
                             let responseTittle = responseParts[1];
                             let responseMsg = responseParts[2];
                             let responseType;
-                                if(responseParts[0] === "0"){
-                                    responseType = 'success';
-                                }else if(responseParts[0] === "1"){
-                                    responseType = 'error';
-                                }
+                            if(responseParts[0] === "0"){
+                                responseType = 'success';
+                            }else if(responseParts[0] === "1"){
+                                responseType = 'error';
+                            }
                             swal.fire({
                                 title: responseTittle,
                                 text: responseMsg,
@@ -129,4 +126,5 @@
 
     </script>
 @stop
+
 

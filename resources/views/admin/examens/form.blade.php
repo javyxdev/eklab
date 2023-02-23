@@ -29,3 +29,19 @@
     <small class="text-danger">{{$message}}</small>
     @enderror
 </div>
+
+<div class="form-group">
+    {!! Form::label('unidad_med','UNIDAD DE MEDIDA:') !!}
+    {!! Form::text('unidad_med', null, ['class' => 'form-control', 'placeholder' => 'Ingrese la unidad de medida']) !!}
+    @error('unidad_med')
+    <small class="text-danger">{{$message}}</small>
+    @enderror
+</div>
+
+<div class="form-group">
+    {!! Form::label('rango_ref','RANGO DE REFERENCIA:') !!}
+    {!! Form::text('rango_ref', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el rango de referencia']) !!}
+    @error('rango_ref')
+    <small class="text-danger">{{$message}}</small>
+    @enderror
+</div>

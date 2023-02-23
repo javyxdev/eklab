@@ -8,6 +8,11 @@ use App\Http\Controllers\Admin\MunicipioController;
 use App\Http\Controllers\Admin\BarrioController;
 use App\Http\Controllers\Admin\OrdenController;
 use App\Http\Controllers\Admin\ExamenController;
+use App\Http\Controllers\Admin\ExmHecesController;
+use App\Http\Controllers\Admin\ExmOrinaController;
+use App\Http\Controllers\Admin\ExmHemogramaController;
+use App\Http\Controllers\Admin\ExmQuimicaController;
+use App\Http\Controllers\Admin\ExmGenericaController;
 
 Route::get('', [HomeController::class,'index']);
 
@@ -18,6 +23,11 @@ Route::resource('municipios',MunicipioController::class)->names('admin.municipio
 Route::resource('barrios',BarrioController::class)->names('admin.barrios');
 Route::resource('ordens',OrdenController::class)->names('admin.ordens');
 Route::resource('examens',ExamenController::class)->names('admin.examens');
+Route::resource('exm_heces_plantillas',ExmHecesController::class)->names('admin.exm_heces_plantillas');
+Route::resource('exm_hemograma_plantillas',ExmHemogramaController::class)->names('admin.exm_hemograma_plantillas');
+Route::resource('exm_orina_plantillas',ExmOrinaController::class)->names('admin.exm_orina_plantillas');
+Route::resource('exm_quimica_plantillas',ExmQuimicaController::class)->names('admin.exm_quimica_plantillas');
+Route::resource('exm_generica_plantillas',ExmGenericaController::class)->names('admin.exm_generica_plantillas');
 
 /** Rutas de Borrados asíncronos en las bandejas de mantenimiento con DataTable */
 Route::post('categoriaExamensDelete/{id}',[Categoria_ExamensController::class,'ajaxDelete']);
@@ -37,6 +47,7 @@ Route::get('ordens/getExamenById/{id}',[OrdenController::class,'getExamenById'])
 Route::post('ordens/totalizarOrden',[OrdenController::class,'totalizarOrden']);
 Route::post('ordens/procesarOrden',[OrdenController::class,'procesarOrden']);
 Route::post('anularOrden/{id}',[OrdenController::class,'anularOrden']);
+Route::post('ordens/{id}/finalizarOrden',[OrdenController::class,'finalizarOrden']);
 
 
 

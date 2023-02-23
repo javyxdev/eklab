@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('deta_ordens', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('completado');
             $table->unsignedBigInteger('orden_id');
             $table->unsignedBigInteger('examen_id');
 

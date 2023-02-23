@@ -40,6 +40,7 @@ return new class extends Migration
             $table->string('cil_cereos',25);
             $table->string('observaciones',300)->nullable();
             $table->unsignedBigInteger('examen_id');
+            $table->unsignedBigInteger('deta_orden_id');
             $table->foreign('examen_id')->references('id')->on('examens')->onDelete('restrict');
             $table->timestamps();
         });

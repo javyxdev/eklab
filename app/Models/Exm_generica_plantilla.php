@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Exm_hemograma_plantilla extends Model
+class Exm_generica_plantilla extends Model
 {
     use HasFactory;
+
+    public $table = "exm_generica_plantilla";
 
     protected $guarded = [];
 
