@@ -11,10 +11,13 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            {!! Form::open(['route' => 'admin.pacientes.store']) !!}
-                    @include('admin.pacientes.form')
-                {!! Form::submit('GUARDAR PACIENTE', ['class' => 'btn btn-success']) !!}
-            {!! Form::close([]) !!}
+            <form method="POST" action="{{ route('admin.pacientes.store', $paciente = null) }}">
+                @csrf
+
+                @include('admin.pacientes.form')
+
+                <button type="submit" class="btn btn-success">GUARDAR PACIENTE</button>
+            </form>
         </div>
     </div>
 @stop

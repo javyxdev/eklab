@@ -1,34 +1,45 @@
 <div class="form-group">
-    {!! Form::label('name','NOMBRE:') !!}
-    {!! Form::text('nombre', null, ['class' => 'form-control', 'placeholder' => 'Ingrese los nombres del Paciente']) !!}
+    <label for="nombre">NOMBRE:</label>
+    <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ingrese los nombres del Paciente"
+           value="{{ old('nombre', $paciente->nombre ?? '') }}">
     @error('nombre')
-    <small class="text-danger">{{$message}}</small>
+    <small class="text-danger">{{ $message }}</small>
     @enderror
 </div>
 
 <div class="form-group">
-    {!! Form::label('apellido','APELLIDO:') !!}
-    {!! Form::text('apellido', null, ['class' => 'form-control', 'placeholder' => 'Ingrese los apellidos del Paciente']) !!}
+    <label for="apellido">APELLIDO:</label>
+    <input type="text" name="apellido" id="apellido" class="form-control" placeholder="Ingrese los apellidos del Paciente"
+           value="{{ old('apellido', $paciente->apellido ?? '') }}">
     @error('apellido')
-    <small class="text-danger">{{$message}}</small>
+    <small class="text-danger">{{ $message }}</small>
     @enderror
 </div>
 
 <div class="form-group">
-    {!! Form::label('genero','GENERO:') !!}
-    {!! Form::select('genero', $genero, null, ['class' => 'form-control col-2', 'placeholder' => 'Seleccione Género']) !!}
+    <label for="genero">GÉNERO:</label>
+    <select name="genero" id="genero" class="form-control col-2">
+        <option value="">Seleccione Género</option>
+        @foreach($genero as $key => $value)
+            <option value="{{ $key }}"
+                {{ old('genero', $paciente->genero ?? '') == $key ? 'selected' : '' }}>
+                {{ $value }}
+            </option>
+        @endforeach
+    </select>
     @error('genero')
-    <small class="text-danger">{{$message}}</small>
+    <small class="text-danger">{{ $message }}</small>
     @enderror
 </div>
 
 <div class="form-group">
     <div class="row">
         <div class="col-2">
-            {!! Form::label('fecha_nacimiento','FECHA NACIMIENTO:') !!}
-            {!! Form::date('fecha_nacimiento', null, ['class' => 'form-control']) !!}
+            <label for="fecha_nacimiento">FECHA NACIMIENTO:</label>
+            <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="form-control"
+                   value="{{ old('fecha_nacimiento', $paciente->fecha_nacimiento ?? '') }}">
             @error('fecha_nacimiento')
-            <small class="text-danger">{{$message}}</small>
+            <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>
         <div class="col-2">
@@ -39,40 +50,68 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('dui','DUI (Dejar vacío en caso de ser menor de edad):') !!}
-    {!! Form::text('dui', null, ['class' => 'form-control col-2', 'placeholder' => '00000000-0', 'pattern' => '[0-9]+' ,'maxlength' => '9']) !!}
+    <label for="dui">DUI (Dejar vacío en caso de ser menor de edad):</label>
+    <input type="text" name="dui" id="dui" class="form-control col-2" placeholder="00000000-0"
+           pattern="[0-9]+" maxlength="9" value="{{ old('dui', $paciente->dui ?? '') }}">
     @error('dui')
-    <small class="text-danger">{{$message}}</small>
+    <small class="text-danger">{{ $message }}</small>
     @enderror
 </div>
 
 <div class="form-group">
-    {!! Form::label('telefono','TELEFONO:') !!}
-    {!! Form::text('telefono', null, ['class' => 'form-control col-4', 'placeholder' => 'Ingrese un numero de telefono válido']) !!}
+    <label for="telefono">TELÉFONO:</label>
+    <input type="text" name="telefono" id="telefono" class="form-control col-4"
+           placeholder="Ingrese un número de teléfono válido"
+           value="{{ old('telefono', $paciente->telefono ?? '') }}">
     @error('telefono')
-    <small class="text-danger">{{$message}}</small>
+    <small class="text-danger">{{ $message }}</small>
     @enderror
 </div>
 
 <div class="form-group">
-    {!! Form::label('email','CORREO ELECTRÓNICO:') !!}
-    {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'name@correo.com']) !!}
+    <label for="email">CORREO ELECTRÓNICO:</label>
+    <input type="email" name="email" id="email" class="form-control"
+           placeholder="name@correo.com" value="{{ old('email', $paciente->email ?? '') }}">
 </div>
 
 <div class="form-group">
-    {!! Form::label('departamento_id','DEPARTAMENTO:') !!}
-    {!! Form::select('departamento_id', $departamentos, null, ['class' => 'form-control', 'placeholder' => 'Seleccione un Departamento']) !!}
+    <label for="departamento_id">DEPARTAMENTO:</label>
+    <select name="departamento_id" id="departamento_id" class="form-control">
+        <option value="">Seleccione un Departamento</option>
+        @foreach($departamentos as $id => $desc)
+            <option value="{{ $id }}"
+                {{ old('departamento_id', $paciente->departamento_id ?? '') == $id ? 'selected' : '' }}>
+                {{ $desc }}
+            </option>
+        @endforeach
+    </select>
     @error('departamento_id')
-    <small class="text-danger">{{$message}}</small>
+    <small class="text-danger">{{ $message }}</small>
     @enderror
 </div>
 
 <div class="form-group">
-    {!! Form::label('municipio_id','MUNICIPIO:') !!}
-    {!! Form::select('municipio_id',$municipios, null, ['class' => 'form-control', 'placeholder' => 'Seleccione un Municipio']) !!}
+    <label for="municipio_id">MUNICIPIO:</label>
+    <select name="municipio_id" id="municipio_id" class="form-control">
+        <option value="">Seleccione un Municipio</option>
+        @foreach($municipios as $id => $desc)
+            <option value="{{ $id }}"
+                {{ old('municipio_id', $paciente->municipio_id ?? '') == $id ? 'selected' : '' }}>
+                {{ $desc }}
+            </option>
+        @endforeach
+    </select>
 </div>
 
 <div class="form-group">
-    {!! Form::label('barrio_id','BARRIO / COLONIA:') !!}
-    {!! Form::select('barrio_id', $barrios, null, ['class' => 'form-control', 'placeholder' => 'Seleccione un Barrio']) !!}
+    <label for="barrio_id">BARRIO / COLONIA:</label>
+    <select name="barrio_id" id="barrio_id" class="form-control">
+        <option value="">Seleccione un Barrio</option>
+        @foreach($barrios as $id => $desc)
+            <option value="{{ $id }}"
+                {{ old('barrio_id', $paciente->barrio_id ?? '') == $id ? 'selected' : '' }}>
+                {{ $desc }}
+            </option>
+        @endforeach
+    </select>
 </div>

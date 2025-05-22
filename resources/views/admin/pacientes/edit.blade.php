@@ -11,15 +11,20 @@
 @section('content')
     @if(session('info'))
         <div class="alert alert-success">
-            <strong>{{session('info')}}</strong>
+            <strong>{{ session('info') }}</strong>
         </div>
     @endif
+
     <div class="card">
         <div class="card-body">
-            {!! Form::model($paciente,['route' => ['admin.pacientes.update', $paciente], 'method' => 'put']) !!}
-                    @include('admin.pacientes.form')
-                {!! Form::submit('ACTUALIZAR PACIENTE', ['class' => 'btn btn-success']) !!}
-            {!! Form::close([]) !!}
+            <form action="{{ route('admin.pacientes.update', $paciente) }}" method="POST">
+                @csrf
+                @method('PUT')
+
+                @include('admin.pacientes.form')
+
+                <button type="submit" class="btn btn-success">ACTUALIZAR PACIENTE</button>
+            </form>
         </div>
     </div>
 @stop
