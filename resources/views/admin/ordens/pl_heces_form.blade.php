@@ -1,5 +1,6 @@
 <div class="modal-body">
-    {!! Form::open(['route' => 'admin.exm_heces_plantillas.store']) !!}
+    <form action="{{ route('admin.exm_heces_plantillas.store') }}" method="POST">
+        @csrf
         <div class="row">
             <div class="col-2">
                 <label for="id_exm_heces">ID EXAMEN</label>
@@ -10,81 +11,111 @@
                 <input type="text" id="id_deta_prueba_heces" name="deta_orden_id" class="form-control" readonly>
             </div>
         </div>
+
         <br>
+
         <div class="row">
             <div class="col-4">
-                {!! Form::label('color','COLOR:') !!}
-                {!! Form::select('color', $colores, null, ['class' => 'form-control', 'placeholder' => 'Seleccione un Color']) !!}
+                <label for="color">COLOR:</label>
+                <select name="color" id="color" class="form-control" >
+                    <option value="" disabled selected>Seleccione un Color</option>
+                    @foreach($colores as $key => $value)
+                        <option value="{{ $key }}" {{ old('color') == $key ? 'selected' : '' }}>{{ $value }}</option>
+                    @endforeach
+                </select>
                 @error('color')
-                <small class="text-danger">{{$message}}</small>
+                <small class="text-danger">{{ $message }}</small>
                 @enderror
+
                 <br>
-                {!! Form::label('consistencia','CONSISTENCIA:') !!}
-                {!! Form::select('consistencia', $consistencias, null, ['class' => 'form-control', 'placeholder' => 'Seleccione consistencia']) !!}
+
+                <label for="consistencia">CONSISTENCIA:</label>
+                <select name="consistencia" id="consistencia" class="form-control">
+                    <option value="" disabled selected>Seleccione consistencia</option>
+                    @foreach($consistencias as $key => $value)
+                        <option value="{{ $key }}" {{ old('consistencia') == $key ? 'selected' : '' }}>{{ $value }}</option>
+                    @endforeach
+                </select>
                 @error('consistencia')
-                <small class="text-danger">{{$message}}</small>
+                <small class="text-danger">{{ $message }}</small>
                 @enderror
+
                 <br>
-                {!! Form::label('mucus','MUCUS:') !!}
-                {!! Form::text('mucus', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el resultado']) !!}
+
+                <label for="mucus">MUCUS:</label>
+                <input type="text" name="mucus" id="mucus" class="form-control" placeholder="Ingrese el resultado" value="{{ old('mucus') }}">
                 @error('mucus')
-                <small class="text-danger">{{$message}}</small>
+                <small class="text-danger">{{ $message }}</small>
                 @enderror
+
                 <br>
-                {!! Form::label('restos_alim_mac','RESTOS ALIMENTICIOS MACROSCOPICOS:') !!}
-                {!! Form::text('restos_alim_mac', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el resultado']) !!}
+
+                <label for="restos_alim_mac">RESTOS ALIMENTICIOS MACROSCOPICOS:</label>
+                <input type="text" name="restos_alim_mac" id="restos_alim_mac" class="form-control" placeholder="Ingrese el resultado" value="{{ old('restos_alim_mac') }}">
                 @error('restos_alim_mac')
-                <small class="text-danger">{{$message}}</small>
+                <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>
+
             <div class="col-4">
-                {!! Form::label('sangre','SANGRE:') !!}
-                {!! Form::text('sangre', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el resultado']) !!}
+                <label for="sangre">SANGRE:</label>
+                <input type="text" name="sangre" id="sangre" class="form-control" placeholder="Ingrese el resultado" value="{{ old('sangre') }}">
                 @error('sangre')
-                <small class="text-danger">{{$message}}</small>
+                <small class="text-danger">{{ $message }}</small>
                 @enderror
+
                 <br>
-                {!! Form::label('leucocitos','LEUCOCITOS:') !!}
-                {!! Form::text('leucocitos', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el resultado']) !!}
+
+                <label for="leucocitos">LEUCOCITOS:</label>
+                <input type="text" name="leucocitos" id="leucocitos" class="form-control" placeholder="Ingrese el resultado" value="{{ old('leucocitos') }}">
                 @error('leucocitos')
-                <small class="text-danger">{{$message}}</small>
+                <small class="text-danger">{{ $message }}</small>
                 @enderror
+
                 <br>
-                {!! Form::label('hematies','HEMATIES:') !!}
-                {!! Form::text('hematies', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el resultado']) !!}
+
+                <label for="hematies">HEMATIES:</label>
+                <input type="text" name="hematies" id="hematies" class="form-control" placeholder="Ingrese el resultado" value="{{ old('hematies') }}">
                 @error('hematies')
-                <small class="text-danger">{{$message}}</small>
+                <small class="text-danger">{{ $message }}</small>
                 @enderror
+
                 <br>
-                {!! Form::label('levadura','LEVADURA:') !!}
-                {!! Form::text('levadura', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el resultado']) !!}
+
+                <label for="levadura">LEVADURA:</label>
+                <input type="text" name="levadura" id="levadura" class="form-control" placeholder="Ingrese el resultado" value="{{ old('levadura') }}">
                 @error('levadura')
-                <small class="text-danger">{{$message}}</small>
+                <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>
+
             <div class="col-4">
-                {!! Form::label('restos_alim_mic','RESTOS ALIMENTICIOS MICROSCOPICOS:') !!}
-                {!! Form::text('restos_alim_mic', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el resultado']) !!}
-                @error('restos_alim_mac')
-                <small class="text-danger">{{$message}}</small>
+                <label for="restos_alim_mic">RESTOS ALIMENTICIOS MICROSCOPICOS:</label>
+                <input type="text" name="restos_alim_mic" id="restos_alim_mic" class="form-control" placeholder="Ingrese el resultado" value="{{ old('restos_alim_mic') }}">
+                @error('restos_alim_mic')
+                <small class="text-danger">{{ $message }}</small>
                 @enderror
+
                 <br>
-                {!! Form::label('parasitos','PARASITOS:') !!}
-                {!! Form::textArea('parasitos', null, ['class' => 'form-control', 'rows' => 3]) !!}
+
+                <label for="parasitos">PARASITOS:</label>
+                <textarea name="parasitos" id="parasitos" rows="3" class="form-control">{{ old('parasitos') }}</textarea>
                 @error('parasitos')
-                <small class="text-danger">{{$message}}</small>
+                <small class="text-danger">{{ $message }}</small>
                 @enderror
+
                 <br>
-                {!! Form::label('observaciones','OBSERVACIONES:') !!}
-                {!! Form::textArea('observaciones', null, ['class' => 'form-control', 'rows' => 3]) !!}
+
+                <label for="observaciones">OBSERVACIONES:</label>
+                <textarea name="observaciones" id="observaciones" rows="3" class="form-control">{{ old('observaciones') }}</textarea>
                 @error('observaciones')
-                <small class="text-danger">{{$message}}</small>
+                <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>
         </div>
 </div>
 <div class="modal-footer">
-    {!! Form::submit('GUARDAR RESULTADOS', ['class' => 'btn btn-success']) !!}
+    <button type="submit" class="btn btn-success">GUARDAR RESULTADOS</button>
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-    {!! Form::close([]) !!}
+    </form>
 </div>

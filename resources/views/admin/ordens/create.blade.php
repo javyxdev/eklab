@@ -5,65 +5,93 @@
 @section('content_header')
     <h1><i class="fa fa-clipboard-list"></i> Generar una Orden de Examenes</h1>
     <p>*Ingrese todos los datos requeridos para guardar una nueva orden.</p>
-    <a href="{{route('admin.ordens.index')}}" class="btn btn-primary btn-sm"><i class="fa fa-arrow-left"></i>  Regresar a listado</a>
+    <a href="{{ route('admin.ordens.index') }}" class="btn btn-primary btn-sm">
+        <i class="fa fa-arrow-left"></i>  Regresar a listado
+    </a>
 @stop
 
 @section('content')
     <div class="card">
         <div class="card-body">
             <div class="form-group row col-12">
-                {!! Form::label('paciente_id','PACIENTE:') !!}
-                {!! Form::select('paciente_id', $pacientes, null, ['class' => 'form-control', 'placeholder' => 'Seleccione un Paciente']) !!}
+                <label for="paciente_id">PACIENTE:</label>
+                <select name="paciente_id" id="paciente_id" class="form-control">
+                    <option value="" disabled selected>Seleccione un Paciente</option>
+                    @foreach($pacientes as $id => $nombre)
+                        <option value="{{ $id }}" {{ old('paciente_id') == $id ? 'selected' : '' }}>
+                            {{ $nombre }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('paciente_id')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
             </div>
 
             <div class="row">
                 <div class="form-group col-3">
-                    <label>GENERO:</label>
+                    <label for="genero">GENERO:</label>
                     <input type="text" class="form-control" id="genero" disabled>
                 </div>
                 <div class="form-group col-3">
-                    <label>FECHA NACIMIENTO:</label>
+                    <label for="fechaNac">FECHA NACIMIENTO:</label>
                     <input type="text" class="form-control" id="fechaNac" disabled>
                 </div>
                 <div class="form-group col-3">
-                    <label>DUI:</label>
+                    <label for="dui">DUI:</label>
                     <input type="text" class="form-control" id="dui" disabled>
                 </div>
                 <div class="form-group col-3">
-                    <label>TELEFONO:</label>
+                    <label for="telefono">TELEFONO:</label>
                     <input type="text" class="form-control" id="telefono" disabled>
                 </div>
             </div>
 
-            <small>¿No encuentra el Paciente? Puede ingresar un nuevo paciente aqui: &nbsp; &nbsp;
-                <a href="{{route('admin.pacientes.create')}}" class="btn btn-success btn-xs">
-                    <i class="fa fa-plus-circle"></i>
-                    Nuevo Paciente
+            <small>
+                ¿No encuentra el Paciente? Puede ingresar un nuevo paciente aqui:&nbsp;&nbsp;
+                <a href="{{ route('admin.pacientes.create') }}" class="btn btn-success btn-xs">
+                    <i class="fa fa-plus-circle"></i> Nuevo Paciente
                 </a>
                 &nbsp;
                 ¿Desea actualizar los datos del paciente?
                 &nbsp;
-                <button class="btn btn-success btn-xs" onclick="editarPaciente()"> <i class="fa fa-user-edit"></i> Editar Paciente</button>
+                <button type="button" class="btn btn-success btn-xs" onclick="editarPaciente()">
+                    <i class="fa fa-user-edit"></i> Editar Paciente
+                </button>
             </small>
-            </br></br>
+            <br><br>
+
             <div class="form-group col-12">
-                {!! Form::label('examen_id','LISTADO DE EXAMENES:') !!}
-                </br>
+                <label for="examen_id">LISTADO DE EXAMENES:</label><br>
                 <small>Seleccione uno o varios exámenes</small>
-                {!! Form::select('examen_id', $examenes, null, ['class' => 'form-control', 'multiple' => 'multiple' ]) !!}
+                <select name="examen_id[]" id="examen_id" class="form-control" multiple>
+                    @foreach($examenes as $id => $descripcion)
+                        <option value="{{ $id }}" {{ (collect(old('examen_id'))->contains($id)) ? 'selected' : '' }}>
+                            {{ $descripcion }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('examen_id')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
             </div>
 
             <div class="form-group col-12">
-                {!! Form::label('total','TOTAL ORDEN $:') !!}
-                {!! Form::text('total', null, ['class' => 'form-control col-4', 'disabled']) !!}
+                <label for="total">TOTAL ORDEN $:</label>
+                <input type="text" name="total" id="total" class="form-control col-4" disabled>
             </div>
 
             <div class="form-controlcol-12 text-center">
-                <button id="btnTotalizar" class="btn btn-dark" onclick="totalizarOrden()"><i class="fa fa-calculator fa-fw"></i> TOTALIZAR ORDEN</button>
-                <button id="btnProcesar" class="btn btn-success" onclick="procesarOrden()" disabled><i class="fa fa-check-circle fa-fw"></i> PROCESAR ORDEN</button>
-                <button id="btnModificar" class="btn btn-warning" onclick="modificarOrden()" disabled><i class="fa fa-edit fa-fw"></i> MODIFICAR ORDEN</button>
+                <button type="button" id="btnTotalizar" class="btn btn-dark" onclick="totalizarOrden()">
+                    <i class="fa fa-calculator fa-fw"></i> TOTALIZAR ORDEN
+                </button>
+                <button type="button" id="btnProcesar" class="btn btn-success" onclick="procesarOrden()" disabled>
+                    <i class="fa fa-check-circle fa-fw"></i> PROCESAR ORDEN
+                </button>
+                <button type="button" id="btnModificar" class="btn btn-warning" onclick="modificarOrden()" disabled>
+                    <i class="fa fa-edit fa-fw"></i> MODIFICAR ORDEN
+                </button>
             </div>
-
         </div>
     </div>
 @stop
@@ -73,32 +101,32 @@
         $('#paciente_id').select2();
         $('#examen_id').select2();
 
-        /** Recopilador de datos del Paciente */
+        // Recopilador de datos del Paciente
         $('#paciente_id').change(function(){
             var id = $(this).val();
             $.ajax({
-                url:'getPacienteById/'+id,
-                type:'get',
-                success: function (response) {
+                url: 'getPacienteById/' + id,
+                type: 'get',
+                success: function(response) {
                     $("#genero").val(response.paciente.genero);
                     $("#fechaNac").val(response.paciente.fecha_nacimiento);
                     $("#dui").val(response.paciente.dui);
                     $("#telefono").val(response.paciente.telefono);
                 },
-                error: function (x, e,  thrownError) {
+                error: function (x, e, thrownError) {
                     swal.fire("Error", x.responseText, "error");
                 }
             });
         });
 
-        /** Editar paciente*/
+        // Editar paciente
         function editarPaciente(){
-            var url = '{{route('admin.pacientes.edit',':id')}}'
-            url = url.replace(':id',$('#paciente_id').val());
+            var url = '{{ route('admin.pacientes.edit', ':id') }}';
+            url = url.replace(':id', $('#paciente_id').val());
             window.open(url);
         }
 
-        /** Función para pre-totalizar la orden. */
+        // Función para pre-totalizar la orden.
         function totalizarOrden(){
             var idPaciente = $('#paciente_id').val();
             var idExamens = [];
@@ -137,7 +165,6 @@
             }
         };
 
-
         function procesarOrden(){
             var idPaciente = $('#paciente_id').val();
             var idExamens = [];
@@ -158,7 +185,7 @@
                     swal.fire({
                         title: '¡Procesado!',
                         text: response,
-                        type: 'success',
+                        icon: 'success',
                         showCancelButton: false,
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: 'OK',
@@ -177,6 +204,5 @@
             $('#examen_id').prop('disabled',false);
             $('#paciente_id').prop('disabled',false);
         }
-
     </script>
 @stop

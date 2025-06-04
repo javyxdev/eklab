@@ -1,170 +1,203 @@
 <div class="modal-body">
-    {!! Form::open(['route' => 'admin.exm_orina_plantillas.store']) !!}
-    <div class="row">
-        <div class="col-2">
-            <label for="id_exm_orina">ID EXAMEN</label>
-            <input type="text" id="id_exm_orina" name="examen_id" class="form-control" readonly>
+    <form action="{{ route('admin.exm_orina_plantillas.store') }}" method="POST">
+        @csrf
+        <div class="row">
+            <div class="col-2">
+                <label for="id_exm_orina">ID EXAMEN</label>
+                <input type="text" id="id_exm_orina" name="examen_id" class="form-control" readonly>
+            </div>
+            <div class="col-2">
+                <label for="id_deta_prueba_orina">No. PRUEBA</label>
+                <input type="text" id="id_deta_prueba_orina" name="deta_orden_id" class="form-control" readonly>
+            </div>
         </div>
-        <div class="col-2">
-            <label for="id_deta_prueba_orina">No. PRUEBA</label>
-            <input type="text" id="id_deta_prueba_orina" name="deta_orden_id" class="form-control" readonly>
+        <br>
+        <div class="row">
+            <div class="col-3">
+                <label for="color">COLOR:</label>
+                <select name="color" id="color" class="form-control" >
+                    <option value="" disabled selected>Seleccione un Color</option>
+                    @foreach ($colores as $key => $value)
+                        <option value="{{ $key }}" {{ old('color') == $key ? 'selected' : '' }}>{{ $value }}</option>
+                    @endforeach
+                </select>
+                @error('color')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+                <br>
+
+                <label for="aspecto">ASPECTO:</label>
+                <select name="aspecto" id="aspecto" class="form-control">
+                    <option value="" disabled selected>Seleccione el aspecto</option>
+                    @foreach ($aspectos as $key => $value)
+                        <option value="{{ $key }}" {{ old('aspecto') == $key ? 'selected' : '' }}>{{ $value }}</option>
+                    @endforeach
+                </select>
+                @error('aspecto')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+                <br>
+
+                <label for="densidad">DENSIDAD:</label>
+                <input type="text" name="densidad" id="densidad" class="form-control" placeholder="Ingrese el resultado" value="{{ old('densidad') }}">
+                @error('densidad')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+                <br>
+
+                <label for="ph">PH:</label>
+                <input type="text" name="ph" id="ph" class="form-control" placeholder="Ingrese el resultado" value="{{ old('ph') }}">
+                @error('ph')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+                <br>
+
+                <label for="proteinas">PROTEINAS:</label>
+                <input type="text" name="proteinas" id="proteinas" class="form-control" placeholder="Ingrese el resultado" value="{{ old('proteinas') }}">
+                @error('proteinas')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+                <br>
+
+                <label for="glucosa">GLUCOSA:</label>
+                <input type="text" name="glucosa" id="glucosa" class="form-control" placeholder="Ingrese el resultado" value="{{ old('glucosa') }}">
+                @error('glucosa')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+
+            <div class="col-3">
+                <label for="sangre_oculta">SANGRE OCULTA:</label>
+                <input type="text" name="sangre_oculta" id="sangre_oculta" class="form-control" placeholder="Ingrese el resultado" value="{{ old('sangre_oculta') }}">
+                @error('sangre_oculta')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+                <br>
+
+                <label for="cuerpos_cetonicos">CUERPOS CETONICOS:</label>
+                <input type="text" name="cuerpos_cetonicos" id="cuerpos_cetonicos" class="form-control" placeholder="Ingrese el resultado" value="{{ old('cuerpos_cetonicos') }}">
+                @error('cuerpos_cetonicos')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+                <br>
+
+                <label for="urobilinogeo">UROBILINOGENO:</label>
+                <input type="text" name="urobilinogeo" id="urobilinogeo" class="form-control" placeholder="Ingrese el resultado" value="{{ old('urobilinogeo') }}">
+                @error('urobilinogeo')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+                <br>
+
+                <label for="bilirrubina">BILIRRUBINA:</label>
+                <input type="text" name="bilirrubina" id="bilirrubina" class="form-control" placeholder="Ingrese el resultado" value="{{ old('bilirrubina') }}">
+                @error('bilirrubina')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+                <br>
+
+                <label for="nitritos">NITRITOS:</label>
+                <input type="text" name="nitritos" id="nitritos" class="form-control" placeholder="Ingrese el resultado" value="{{ old('nitritos') }}">
+                @error('nitritos')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+                <br>
+
+                <label for="hemoglobina">HEMOGLOBINA:</label>
+                <input type="text" name="hemoglobina" id="hemoglobina" class="form-control" placeholder="Ingrese el resultado" value="{{ old('hemoglobina') }}">
+                @error('hemoglobina')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+
+            <div class="col-3">
+                <label for="eterasa_leucocitaria">ESTERASA LEUCOCITARIA:</label>
+                <input type="text" name="eterasa_leucocitaria" id="eterasa_leucocitaria" class="form-control" placeholder="Ingrese el resultado" value="{{ old('eterasa_leucocitaria') }}">
+                @error('eterasa_leucocitaria')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+                <br>
+
+                <label for="hematies">HEMATIES:</label>
+                <input type="text" name="hematies" id="hematies" class="form-control" placeholder="Ingrese el resultado" value="{{ old('hematies') }}">
+                @error('hematies')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+                <br>
+
+                <label for="leucocitos">LEUCOCITOS:</label>
+                <input type="text" name="leucocitos" id="leucocitos" class="form-control" placeholder="Ingrese el resultado" value="{{ old('leucocitos') }}">
+                @error('leucocitos')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+                <br>
+
+                <label for="celulas_epiteliales">CELULAS EPITELIALES:</label>
+                <input type="text" name="celulas_epiteliales" id="celulas_epiteliales" class="form-control" placeholder="Ingrese el resultado" value="{{ old('celulas_epiteliales') }}">
+                @error('celulas_epiteliales')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+                <br>
+
+                <label for="filamentos_mucoides">FILAMENTOS MUCOIDES:</label>
+                <input type="text" name="filamentos_mucoides" id="filamentos_mucoides" class="form-control" placeholder="Ingrese el resultado" value="{{ old('filamentos_mucoides') }}">
+                @error('filamentos_mucoides')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+                <br>
+
+                <label for="bacterias">BACTERIAS:</label>
+                <input type="text" name="bacterias" id="bacterias" class="form-control" placeholder="Ingrese el resultado" value="{{ old('bacterias') }}">
+                @error('bacterias')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+
+            <div class="col-3">
+                <label for="cil_granulosos">CILINDROS GRANULOSOS:</label>
+                <input type="text" name="cil_granulosos" id="cil_granulosos" class="form-control" placeholder="Ingrese el resultado" value="{{ old('cil_granulosos') }}">
+                @error('cil_granulosos')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+                <br>
+
+                <label for="cil_leucocitario">CILINDROS LEUCOCITARIOS:</label>
+                <input type="text" name="cil_leucocitario" id="cil_leucocitario" class="form-control" placeholder="Ingrese el resultado" value="{{ old('cil_leucocitario') }}">
+                @error('cil_leucocitario')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+                <br>
+
+                <label for="cil_hematicos">CILINDROS HEMÁTICOS:</label>
+                <input type="text" name="cil_hematicos" id="cil_hematicos" class="form-control" placeholder="Ingrese el resultado" value="{{ old('cil_hematicos') }}">
+                @error('cil_hematicos')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+                <br>
+
+                <label for="cil_hialianos">CILINDROS HILIANOS:</label>
+                <input type="text" name="cil_hialianos" id="cil_hialianos" class="form-control" placeholder="Ingrese el resultado" value="{{ old('cil_hialianos') }}">
+                @error('cil_hialianos')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+                <br>
+
+                <label for="cil_cereos">CILINDROS CEREOS:</label>
+                <input type="text" name="cil_cereos" id="cil_cereos" class="form-control" placeholder="Ingrese el resultado" value="{{ old('cil_cereos') }}">
+                @error('cil_cereos')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+                <br>
+
+                <label for="observaciones">OBSERVACIONES:</label>
+                <textarea name="observaciones" id="observaciones" class="form-control" rows="3">{{ old('observaciones') }}</textarea>
+                @error('observaciones')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
         </div>
-    </div>
-    <br>
-    <div class="row">
-        <div class="col-3">
-            {!! Form::label('color','COLOR:') !!}
-            {!! Form::select('color', $colores, null, ['class' => 'form-control', 'placeholder' => 'Seleccione un Color']) !!}
-            @error('color')
-            <small class="text-danger">{{$message}}</small>
-            @enderror
-            <br>
-            {!! Form::label('aspecto','ASPECTO:') !!}
-            {!! Form::select('aspecto', $aspectos, null, ['class' => 'form-control', 'placeholder' => 'Seleccione el aspecto']) !!}
-            @error('aspecto')
-            <small class="text-danger">{{$message}}</small>
-            @enderror
-            <br>
-            {!! Form::label('densidad','DENSIDAD:') !!}
-            {!! Form::text('densidad', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el resultado']) !!}
-            @error('densidad')
-            <small class="text-danger">{{$message}}</small>
-            @enderror
-            <br>
-            {!! Form::label('ph','PH:') !!}
-            {!! Form::text('ph', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el resultado']) !!}
-            @error('ph')
-            <small class="text-danger">{{$message}}</small>
-            @enderror
-            <br>
-            {!! Form::label('proteinas','PROTEINAS:') !!}
-            {!! Form::text('proteinas', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el resultado']) !!}
-            @error('proteinas')
-            <small class="text-danger">{{$message}}</small>
-            @enderror
-            <br>
-            {!! Form::label('glucosa','GLUCOSA:') !!}
-            {!! Form::text('glucosa', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el resultado']) !!}
-            @error('glucosa')
-            <small class="text-danger">{{$message}}</small>
-            @enderror
-        </div>
-        <div class="col-3">
-            {!! Form::label('sangre_oculta','SANGRE OCULTA:') !!}
-            {!! Form::text('sangre_oculta', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el resultado']) !!}
-            @error('sangre_oculta')
-            <small class="text-danger">{{$message}}</small>
-            @enderror
-            <br>
-            {!! Form::label('cuerpos_cetonicos','CUERPOS CETONICOS:') !!}
-            {!! Form::text('cuerpos_cetonicos', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el resultado']) !!}
-            @error('cuerpos_cetonicos')
-            <small class="text-danger">{{$message}}</small>
-            @enderror
-            <br>
-            {!! Form::label('urobilinogeo','UROBILINOGENO:') !!}
-            {!! Form::text('urobilinogeo', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el resultado']) !!}
-            @error('urobilinogeo')
-            <small class="text-danger">{{$message}}</small>
-            @enderror
-            <br>
-            {!! Form::label('bilirrubina','BILIRRUBINA:') !!}
-            {!! Form::text('bilirrubina', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el resultado']) !!}
-            @error('bilirrubina')
-            <small class="text-danger">{{$message}}</small>
-            @enderror
-            <br>
-            {!! Form::label('nitritos','NITRITOS:') !!}
-            {!! Form::text('nitritos', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el resultado']) !!}
-            @error('nitritos')
-            <small class="text-danger">{{$message}}</small>
-            @enderror
-            <br>
-            {!! Form::label('hemoglobina','HEMOGLOBINA:') !!}
-            {!! Form::text('hemoglobina', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el resultado']) !!}
-            @error('hemoglobina')
-            <small class="text-danger">{{$message}}</small>
-            @enderror
-        </div>
-        <div class="col-3">
-            {!! Form::label('eterasa_leucocitaria','ESTERASA LEUCOCITARIA:') !!}
-            {!! Form::text('eterasa_leucocitaria', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el resultado']) !!}
-            @error('eterasa_leucocitaria')
-            <small class="text-danger">{{$message}}</small>
-            @enderror
-            <br>
-            {!! Form::label('hematies','HEMATIES:') !!}
-            {!! Form::text('hematies', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el resultado']) !!}
-            @error('hematies')
-            <small class="text-danger">{{$message}}</small>
-            @enderror
-            <br>
-            {!! Form::label('leucocitos','LEUCOCITOS:') !!}
-            {!! Form::text('leucocitos', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el resultado']) !!}
-            @error('leucocitos')
-            <small class="text-danger">{{$message}}</small>
-            @enderror
-            <br>
-            {!! Form::label('celulas_epiteliales','CELULAS EPITELIALES:') !!}
-            {!! Form::text('celulas_epiteliales', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el resultado']) !!}
-            @error('celulas_epiteliales')
-            <small class="text-danger">{{$message}}</small>
-            @enderror
-            <br>
-            {!! Form::label('filamentos_mucoides','FILAMENTOS MUCOIDES:') !!}
-            {!! Form::text('filamentos_mucoides', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el resultado']) !!}
-            @error('filamentos_mucoides')
-            <small class="text-danger">{{$message}}</small>
-            @enderror
-            <br>
-            {!! Form::label('bacterias','BACTERIAS:') !!}
-            {!! Form::text('bacterias', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el resultado']) !!}
-            @error('bacterias')
-            <small class="text-danger">{{$message}}</small>
-            @enderror
-        </div>
-        <div class="col-3">
-            {!! Form::label('cil_granulosos','CILINDROS GRANULOSOS:') !!}
-            {!! Form::text('cil_granulosos', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el resultado']) !!}
-            @error('cil_granulosos')
-            <small class="text-danger">{{$message}}</small>
-            @enderror
-            <br>
-            {!! Form::label('cil_leucocitario','CILINDROS LEUCOCITARIOS:') !!}
-            {!! Form::text('cil_leucocitario', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el resultado']) !!}
-            @error('cil_leucocitario')
-            <small class="text-danger">{{$message}}</small>
-            @enderror
-            <br>
-            {!! Form::label('cil_hematicos','CILINDROS HEMÁTICOS:') !!}
-            {!! Form::text('cil_hematicos', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el resultado']) !!}
-            @error('cil_hematicos')
-            <small class="text-danger">{{$message}}</small>
-            @enderror
-            <br>
-            {!! Form::label('cil_hialianos','CILINDROS HILIANOS:') !!}
-            {!! Form::text('cil_hialianos', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el resultado']) !!}
-            @error('cil_hialianos')
-            <small class="text-danger">{{$message}}</small>
-            @enderror
-            <br>
-            {!! Form::label('cil_cereos','CILINDROS CEREOS:') !!}
-            {!! Form::text('cil_cereos', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el resultado']) !!}
-            @error('cil_cereos')
-            <small class="text-danger">{{$message}}</small>
-            @enderror
-            <br>
-            {!! Form::label('observaciones','OBSERVACIONES:') !!}
-            {!! Form::textArea('observaciones', null, ['class' => 'form-control', 'rows' => 3]) !!}
-            @error('observaciones')
-            <small class="text-danger">{{$message}}</small>
-            @enderror
-        </div>
-    </div>
 </div>
 <div class="modal-footer">
-    {!! Form::submit('GUARDAR RESULTADOS', ['class' => 'btn btn-success']) !!}
+    <button type="submit" class="btn btn-success">GUARDAR RESULTADOS</button>
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-    {!! Form::close([]) !!}
+    </form>
 </div>
-

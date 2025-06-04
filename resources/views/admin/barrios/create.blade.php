@@ -22,10 +22,11 @@
                 </select>
             </div>
             <!-- Inicio Formulario -->
-            {!! Form::open(['route' => 'admin.barrios.store']) !!}
-            @include('admin.barrios.form')
-            {!! Form::submit('GUARDAR REGISTRO', ['class' => 'btn btn-success']) !!}
-            {!! Form::close([]) !!}
+            <form action="{{ route('admin.barrios.store') }}" method="POST">
+                @csrf
+                @include('admin.barrios.form')
+                <button type="submit" class="btn btn-success">GUARDAR REGISTRO</button>
+            </form>
         </div>
     </div>
 @stop
