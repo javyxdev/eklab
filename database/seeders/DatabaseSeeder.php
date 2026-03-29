@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
             DepartamentoSeeder::class,
             MunicipioSeeder::class,
             BarrioSeeder::class,
-            CategoriaExamenSeeder::class
+            CategoriaExamenSeeder::class,
+            ExamenSeeder::class
             // Agrega aquí todos los seeders que quieras ejecutar
         ]);
     }
