@@ -102,11 +102,25 @@
                         </div>
                         <div class="form-group">
                             <label for="password">Contraseña <span id="pass_help" class="text-muted small"></span></label>
-                            <input type="password" class="form-control" id="password" name="password">
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="password" name="password">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary toggle-password" type="button" data-target="password">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="password_confirmation">Confirmar Contraseña</label>
-                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary toggle-password" type="button" data-target="password_confirmation">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -128,6 +142,21 @@
                 },
                 "responsive": true,
                 "autoWidth": false,
+            });
+
+            // Lógica para ver/ocultar contraseña
+            $('.toggle-password').click(function() {
+                const targetId = $(this).data('target');
+                const passwordInput = $('#' + targetId);
+                const icon = $(this).find('i');
+
+                if (passwordInput.attr('type') === 'password') {
+                    passwordInput.attr('type', 'text');
+                    icon.removeClass('fa-eye').addClass('fa-eye-slash');
+                } else {
+                    passwordInput.attr('type', 'password');
+                    icon.removeClass('fa-eye-slash').addClass('fa-eye');
+                }
             });
         });
 
