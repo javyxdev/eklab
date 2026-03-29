@@ -70,7 +70,8 @@
 ### Resumen de Cambios:
 1.  **Generación de Seeders desde Datos Locales:**
     *   **ExamenSeeder:** Se extrajeron 18 registros reales de la tabla `examens` de la base de datos local y se generó el seeder correspondiente (`database/seeders/ExamenSeeder.php`).
-    *   **Integración:** Se actualizó `DatabaseSeeder.php` para incluir el nuevo seeder en el flujo principal de carga de datos.
+    *   **UserSeeder:** Se extrajeron los usuarios registrados localmente y se generó su seeder (`database/seeders/UserSeeder.php`).
+    *   **Integración:** Se actualizaron ambos seeders en `DatabaseSeeder.php`.
 2.  **Configuración de Flujo de Trabajo (Git):**
     *   Se estableció la directiva de agregar automáticamente (`git add`) cualquier archivo nuevo generado por el agente al área de preparación.
     *   Consolidación de todos los cambios del día en un único commit enmendado (`amend`) para mantener un historial limpio.
