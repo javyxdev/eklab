@@ -362,6 +362,14 @@ return [
             'route'        => 'admin.barrios.index',
             'active' => ['admin/barrios*'],
         ],
+        ['header' => 'SEGURIDAD'],
+        [
+            'text'       => 'Gestionar Usuarios',
+            'icon' => 'fas fa-fw fa-users-cog',
+            'icon_color' => 'info',
+            'route'        => 'admin.users.index',
+            'active' => ['admin/users*'],
+        ],
     ],
 
     /*
@@ -435,7 +443,7 @@ return [
             ],
         ],
         'Chartjs' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',

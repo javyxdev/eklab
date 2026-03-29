@@ -51,3 +51,74 @@ table.dataTable thead .sorting_desc:after {
     color: #ffffff !important;
     opacity: 0.8 !important;
 }
+
+/* Colores para el Dashboard */
+.info-box.bg-dark-yellow {
+    background-color: #f39c12 !important;
+    color: #343a40 !important;
+}
+
+.bg-dark-yellow .info-box-text, 
+.bg-dark-yellow .info-box-number,
+.bg-dark-yellow .info-box-icon i,
+.bg-dark-yellow .progress-description,
+.bg-dark-yellow .progress-description .btn-outline-dark {
+    color: #343a40 !important;
+}
+
+.bg-dark-yellow .info-box-icon {
+    color: #343a40 !important;
+}
+
+.bg-dark-yellow .progress-bar {
+    background-color: #343a40 !important;
+}
+
+.bg-dark-yellow .btn-outline-dark {
+    border-color: #343a40 !important;
+}
+
+.bg-dark-yellow .btn-outline-dark:hover {
+    background-color: #343a40 !important;
+    color: #f39c12 !important;
+}
+
+/* Mejoras de diseño para Info-Boxes */
+.info-box {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 10px !important;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    min-height: 100px;
+}
+
+.info-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.info-box .info-box-icon {
+    border-radius: 10px 0 0 10px !important;
+    font-size: 1.8rem;
+}
+
+.info-box-number {
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+}
+
+.info-box-text {
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.8rem !important;
+    opacity: 0.9;
+}
+
+.progress-description {
+    margin-top: 10px !important;
+    padding-top: 5px;
+}
+
+/* Colores consistentes para gradientes */
+.bg-gradient-blue { background: linear-gradient(135deg, #007bff 0%, #0056b3 100%) !important; }
+.bg-gradient-green { background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%) !important; }

@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\ExmGenericaController;
 use App\Http\Controllers\Admin\CitaController;
 use App\Http\Controllers\Admin\FacturaController;
 use App\Http\Controllers\Admin\ReporteFacturaController;
+use App\Http\Controllers\Admin\UserController;
 
 Route::get('', [HomeController::class,'index']);
 
@@ -32,6 +33,7 @@ Route::resource('exm_orina_plantillas',ExmOrinaController::class)->names('admin.
 Route::resource('exm_quimica_plantillas',ExmQuimicaController::class)->names('admin.exm_quimica_plantillas');
 Route::resource('exm_generica_plantillas',ExmGenericaController::class)->names('admin.exm_generica_plantillas');
 Route::resource('citas', CitaController::class)->names('admin.citas');
+Route::resource('users', UserController::class)->names('admin.users');
 
 /** Rutas de Facturación (Definir ANTES del resource para evitar colisión con {id}) */
 Route::get('facturas/getOrdensAjax', [FacturaController::class, 'getOrdensAjax'])->name('admin.facturas.getOrdensAjax');
@@ -43,6 +45,7 @@ Route::resource('facturas', FacturaController::class)->names('admin.facturas');
 /** Rutas de Borrados asíncronos en las bandejas de mantenimiento con DataTable */
 Route::post('categoriaExamensDelete/{id}',[Categoria_ExamensController::class,'ajaxDelete']);
 Route::post('pacientesDelete/{id}',[PacienteController::class,'ajaxDelete']);
+Route::post('usersDelete/{id}',[UserController::class,'ajaxDelete']);
 Route::post('municipiosDelete/{id}',[MunicipioController::class,'ajaxDelete']);
 Route::post('barriosDelete/{id}',[BarrioController::class,'ajaxDelete']);
 Route::post('examensDelete/{id}',[ExamenController::class,'ajaxDelete']);

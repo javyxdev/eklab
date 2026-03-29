@@ -52,6 +52,11 @@ Para crear un nuevo mantenimiento (ejemplo: `NuevoModelo`):
 5. **Vistas:** Crear carpeta `resources/views/admin/nuevo_modelos/` y los 4 archivos Blade estándar.
 6. **Menú:** Agregar la opción en `config/adminlte.php`.
 
+## ⚙️ Flujo de Trabajo del Agente
+- **Git Automático:** Todos los archivos nuevos generados por el agente deben agregarse automáticamente al área de preparación (`git add`).
+- **Persistencia de Datos:** Para tablas de catálogos (ej. `examens`, `municipios`), se prefiere la creación de seeders basados en datos reales extraídos de la base de datos local mediante `php artisan tinker`.
+- **Registro de Sesiones:** Al finalizar cada bloque de trabajo significativo, se debe actualizar `SESSIONS.md` con los cambios realizados, pendientes y notas técnicas.
+
 ## 🔍 Patrones Específicos Identificados
 - **Dropdowns Dependientes:** Se manejan vía AJAX en el controlador (ej. `getMunicipiosByDepartamento`).
 - **Eliminación:** Se utiliza un método `ajaxDelete` que devuelve un string de confirmación para ser consumido por DataTables/SweetAlert2.

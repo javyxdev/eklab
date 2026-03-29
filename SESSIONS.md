@@ -64,3 +64,25 @@
 *   Se actualizó `composer.json` y `composer.lock` para incluir `barryvdh/laravel-dompdf`.
 *   Las rutas de administración se reorganizaron en `routes/admin.php` para incluir los nuevos controladores de facturación.
 *   Se recomienda ejecutar `php artisan migrate` para aplicar los cambios en la estructura de `pacientes` y `plantillas`.
+
+## Sesión: 28 de Marzo, 2026 (Continuación)
+
+### Resumen de Cambios:
+1.  **Generación de Seeders desde Datos Locales:**
+    *   **ExamenSeeder:** Se extrajeron 18 registros reales de la tabla `examens` de la base de datos local y se generó el seeder correspondiente (`database/seeders/ExamenSeeder.php`).
+    *   **Integración:** Se actualizó `DatabaseSeeder.php` para incluir el nuevo seeder en el flujo principal de carga de datos.
+2.  **Configuración de Flujo de Trabajo (Git):**
+    *   Se estableció la directiva de agregar automáticamente (`git add`) cualquier archivo nuevo generado por el agente al área de preparación.
+    *   Consolidación de todos los cambios del día en un único commit enmendado (`amend`) para mantener un historial limpio.
+3.  **Actualización del Dashboard:**
+    *   **Backend:** Se modificó `HomeController` para incluir el conteo de citas con estado 'Programada' (`$citasPendientesCount`).
+    *   **Frontend:** Se actualizó el fragmento `infoboxes.blade.php` sustituyendo el bloque de "Categorías de Examen" por uno nuevo de "Citas Pendientes", utilizando un color índigo e icono de calendario.
+4.  **Gestión de Usuarios (Nuevo CRUD):**
+    *   **Backend:** Creación de `UserController` con validación, hash de contraseñas y soporte para borrado asíncrono.
+    *   **Frontend:** Implementación de `admin/users/index.blade.php` utilizando ventanas modales para creación y edición (estilo Facturación). Se estandarizó el tamaño de fuente y el icono del botón "NUEVO USUARIO" (`fa-user-plus`) con el resto del sistema.
+    *   **Seguridad:** Se añadió una restricción para evitar que los usuarios se eliminen a sí mismos.
+    *   **Menú:** Incorporación de la opción "Gestionar Usuarios" en el sidebar de AdminLTE.
+
+### Pendientes / Próximos Pasos:
+*   Evaluar la necesidad de seeders adicionales para otras tablas de catálogos (ej. Usuarios iniciales, configuraciones).
+*   Validar la ejecución del seeder en un entorno limpio mediante `php artisan db:seed --class=ExamenSeeder`.
