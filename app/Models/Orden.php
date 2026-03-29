@@ -18,7 +18,12 @@ class Orden extends Model
     }
 
     //Relaciones Many To One
-    public function Paciente(){
+    public function paciente(){
         return $this->belongsTo(Paciente::class);
+    }
+
+    public function facturas()
+    {
+        return $this->belongsToMany(Factura::class, 'deta_facturas', 'orden_id', 'factura_id');
     }
 }

@@ -22,20 +22,20 @@
         <br>
         <div class="row">
             <div class="col-12">
-                <label for="prueba">PRUEBA:</label>
-                <input type="text" name="prueba" id="prueba" class="form-control" placeholder="Ingrese el nombre de la prueba" value="{{ old('prueba') }}">
+                <label for="qmv_prueba">PRUEBA:</label>
+                <input type="text" name="prueba" id="qmv_prueba" class="form-control" placeholder="Ingrese el nombre de la prueba" value="{{ old('prueba') }}" required>
                 @error('prueba')
                 <small class="text-danger">{{ $message }}</small>
                 @enderror
                 <br>
-                <label for="resultado">RESULTADO:</label>
-                <input type="text" name="resultado" id="resultado" class="form-control" placeholder="Ingrese el resultado" value="{{ old('resultado') }}">
+                <label for="qmv_resultado">RESULTADO:</label>
+                <input type="text" name="resultado" id="qmv_resultado" class="form-control" placeholder="Ingrese el resultado" value="{{ old('resultado') }}" required>
                 @error('resultado')
                 <small class="text-danger">{{ $message }}</small>
                 @enderror
                 <br>
-                <label for="observaciones">OBSERVACIONES:</label>
-                <textarea name="observaciones" id="observaciones" class="form-control" rows="3">{{ old('observaciones') }}</textarea>
+                <label for="qmv_observaciones">OBSERVACIONES:</label>
+                <textarea name="observaciones" id="qmv_observaciones" class="form-control" rows="3">{{ old('observaciones') }}</textarea>
                 @error('observaciones')
                 <small class="text-danger">{{ $message }}</small>
                 @enderror

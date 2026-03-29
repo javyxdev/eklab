@@ -35,4 +35,10 @@ class Paciente extends Model
     public function getNombreCompletoAttribute(){
         return $this->nombre . ' ' . $this->apellido;
     }
+
+    /** Accesor para obtener el nombre completo concatenado con la edad y el DUI */
+    public function getNombreEdadAttribute(){
+        $dui = $this->dui ? " - DUI: {$this->dui}" : "";
+        return ($this->nombre . ' ' . $this->apellido) . ' - ' . ($this->edad ?? 'N/A') . ' Años' . $dui;
+    }
 }

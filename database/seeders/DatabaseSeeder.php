@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             DepartamentoSeeder::class,
             MunicipioSeeder::class,
-            BarrioSeeder::class
+            BarrioSeeder::class,
+            CategoriaExamenSeeder::class
             // Agrega aquí todos los seeders que quieras ejecutar
         ]);
     }

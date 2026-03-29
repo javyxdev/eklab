@@ -44,15 +44,23 @@
         </div>
         <div class="col-2">
             <label for="edad">EDAD:</label>
-            <input type="text" id="edad" class="form-control" disabled>
+            <input type="text" name="edad" id="edad" class="form-control" value="{{ old('edad', $paciente->edad ?? '') }}" disabled>
         </div>
     </div>
 </div>
 
 <div class="form-group">
     <label for="dui">DUI (Dejar vacío en caso de ser menor de edad):</label>
-    <input type="text" name="dui" id="dui" class="form-control col-2" placeholder="00000000-0"
-           pattern="[0-9]+" maxlength="9" value="{{ old('dui', $paciente->dui ?? '') }}">
+    <div class="input-group col-4 p-0">
+        <input type="text" name="dui" id="dui" class="form-control" placeholder="00000000-0"
+               pattern="[0-9]+" maxlength="9" value="{{ old('dui', $paciente->dui ?? '') }}">
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <input type="checkbox" id="sin_dui" name="sin_dui" {{ old('sin_dui') ? 'checked' : '' }}>
+                <label for="sin_dui" class="mb-0 ml-1">Sin DUI / Ingreso manual</label>
+            </div>
+        </div>
+    </div>
     @error('dui')
     <small class="text-danger">{{ $message }}</small>
     @enderror

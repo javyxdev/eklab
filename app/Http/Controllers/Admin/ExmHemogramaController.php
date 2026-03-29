@@ -37,12 +37,35 @@ class ExmHemogramaController extends Controller
      */
     public function store(Request $request)
     {
-        $resultado = Exm_hemograma_plantilla::create($request->all());
+        $request->validate([
+            'examen_id' => 'required',
+            'deta_orden_id' => 'required',
+            'globulos_rojos' => 'required|string|max:25',
+            'hemoglobina' => 'required|string|max:25',
+            'hematocrito' => 'required|string|max:25',
+            'vcm' => 'required|string|max:25',
+            'hcm' => 'required|string|max:25',
+            'chcm' => 'required|string|max:25',
+            'leucocitos' => 'required|string|max:25',
+            'neutrofilos_segmentados' => 'required|string|max:25',
+            'neutrofilos_en_banda' => 'required|string|max:25',
+            'linfocitos' => 'required|string|max:25',
+            'monocitos' => 'required|string|max:25',
+            'eosinofilos' => 'required|string|max:25',
+            'basofilos' => 'required|string|max:25',
+            'recuento_plaquetas' => 'required|string|max:25',
+            'observaciones' => 'nullable|string|max:300',
+        ]);
+
+        $resultado = Exm_hemograma_plantilla::updateOrCreate(
+            ['deta_orden_id' => $request->deta_orden_id],
+            $request->all()
+        );
         $deta_orden = Deta_orden::Find($resultado->deta_orden_id);
         $deta_orden->completado = 1;
         $deta_orden->update();
 
-        $mensaje = 'El examen '.$deta_orden->examen->descripcion.' se completó con éxito.';
+        $mensaje = 'El examen '.$deta_orden->examen->descripcion.' se guardó con éxito.';
 
         return redirect()->back()->with('info',$mensaje);
     }

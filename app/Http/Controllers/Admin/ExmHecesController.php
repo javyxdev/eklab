@@ -37,12 +37,31 @@ class ExmHecesController extends Controller
      */
     public function store(Request $request)
     {
-        $resultado = Exm_heces_plantilla::create($request->all());
+        $request->validate([
+            'examen_id' => 'required',
+            'deta_orden_id' => 'required',
+            'color' => 'required|string|max:25',
+            'consistencia' => 'required|string|max:25',
+            'mucus' => 'required|string|max:25',
+            'restos_alim_mac' => 'required|string|max:25',
+            'sangre' => 'required|string|max:25',
+            'leucocitos' => 'required|string|max:25',
+            'hematies' => 'required|string|max:25',
+            'levadura' => 'required|string|max:25',
+            'restos_alim_mic' => 'required|string|max:25',
+            'parasitos' => 'required|string|max:150',
+            'observaciones' => 'nullable|string|max:300',
+        ]);
+
+        $resultado = Exm_heces_plantilla::updateOrCreate(
+            ['deta_orden_id' => $request->deta_orden_id],
+            $request->all()
+        );
         $deta_orden = Deta_orden::Find($resultado->deta_orden_id);
         $deta_orden->completado = 1;
         $deta_orden->update();
 
-        $mensaje = 'El examen '.$deta_orden->examen->descripcion.' se completó con éxito.';
+        $mensaje = 'El examen '.$deta_orden->examen->descripcion.' se guardó con éxito.';
 
         return redirect()->back()->with('info',$mensaje);
     }

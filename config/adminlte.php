@@ -66,7 +66,7 @@ return [
 
     'usermenu_enabled' => true,
     'usermenu_header' => false,
-    'usermenu_header_class' => 'bg-primary',
+    'usermenu_header_class' => 'bg-institutional',
     'usermenu_image' => false,
     'usermenu_desc' => false,
     'usermenu_profile_url' => false,
@@ -127,7 +127,7 @@ return [
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+    'classes_sidebar' => 'sidebar-dark-custom elevation-4',
     'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-white navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
@@ -252,13 +252,20 @@ return [
             'icon'        => 'fa fa-flask fa-fw',
             'icon_color' => 'orange',
         ],
-        ['header' => 'Panel de Trabajo'],
+        ['header' => 'OPERATIVO'],
         [
             'text' => 'Pacientes',
             'route'  => 'admin.pacientes.index',
             'icon' => 'fas fa-fw fa-user',
             'icon_color' => 'green',
             'active' => ['admin/pacientes*'],
+        ],
+        [
+            'text'        => 'Citas',
+            'route'       => 'admin.citas.index',
+            'icon'        => 'fas fa-fw fa-calendar-alt',
+            'icon_color'  => 'cyan',
+            'active'      => ['admin/citas*'],
         ],
         [
             'text' => 'Ordenes Diarias',
@@ -280,6 +287,21 @@ return [
             'icon' => 'fas fa-fw fa-vial',
             'icon_color' => 'yellow',
             'active' => ['admin/examens*'],
+        ],
+        ['header' => 'FACTURACIÓN'],
+        [
+            'text' => 'Facturación',
+            'route'  => 'admin.facturas.index',
+            'icon' => 'fas fa-fw fa-file-invoice-dollar',
+            'icon_color' => 'success',
+            'active' => ['admin/facturas*'],
+        ],
+        [
+            'text' => 'Reporte de Ventas',
+            'route'  => 'admin.reportes.facturacion.diario',
+            'icon' => 'fas fa-fw fa-chart-line',
+            'icon_color' => 'info',
+            'active' => ['admin/reportes*'],
         ],
         /*[
             'text'    => 'multilevel',
@@ -319,7 +341,7 @@ return [
                 ],
             ],
         ],*/
-        ['header' => 'Ubicaciones'],
+        ['header' => 'UBICACIONES'],
         /*[
             'text'       => 'Departamentos',
             'icon' => 'fas fa-fw fa-map-marked',
@@ -444,6 +466,21 @@ return [
                     'type' => 'js',
                     'asset' => false,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js',
+                ],
+            ],
+        ],
+        'InstitutionalColor' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'css/admin_custom.css',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'js/admin_custom.js',
                 ],
             ],
         ],

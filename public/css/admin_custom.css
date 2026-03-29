@@ -1,0 +1,53 @@
+/* Color institucional para el sidebar de EKLabs */
+.main-sidebar, .main-sidebar::before {
+    background-color: #101931 !important;
+}
+
+.sidebar-dark-custom .nav-sidebar > .nav-item > .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #fff !important;
+}
+
+.brand-link {
+    background-color: #101931 !important;
+    border-bottom: 1px solid #1d294d !important;
+    color: #fff !important;
+}
+
+.sidebar-dark-custom .nav-sidebar .nav-link {
+    color: #c2c7d0;
+}
+
+.sidebar-dark-custom .nav-sidebar .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    color: #fff !important;
+}
+
+.sidebar-dark-custom .nav-header {
+    background-color: transparent !important;
+    color: #869099 !important;
+}
+
+.bg-institutional {
+    background-color: #101931 !important;
+    color: #fff !important;
+}
+
+/* Encabezados de Tablas (DataTables) */
+table.dataTable thead th, 
+table.table thead th {
+    background-color: #101931 !important;
+    color: #ffffff !important;
+    border-bottom: 1px solid #1d294d !important;
+}
+
+/* Ajuste para los iconos de ordenamiento de DataTables */
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc:after {
+    color: #ffffff !important;
+    opacity: 0.8 !important;
+}

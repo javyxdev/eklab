@@ -60,10 +60,6 @@
     </div>
 @stop
 
-@section('css')
-    <link rel="stylesheet" href="#">
-@stop
-
 @section('js')
     <script>
         $(document).ready(function() {

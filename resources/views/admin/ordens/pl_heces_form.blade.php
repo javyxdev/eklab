@@ -16,8 +16,8 @@
 
         <div class="row">
             <div class="col-4">
-                <label for="color">COLOR:</label>
-                <select name="color" id="color" class="form-control" >
+                <label for="heces_color">COLOR:</label>
+                <select name="color" id="heces_color" class="form-control" required>
                     <option value="" disabled selected>Seleccione un Color</option>
                     @foreach($colores as $key => $value)
                         <option value="{{ $key }}" {{ old('color') == $key ? 'selected' : '' }}>{{ $value }}</option>
@@ -29,8 +29,8 @@
 
                 <br>
 
-                <label for="consistencia">CONSISTENCIA:</label>
-                <select name="consistencia" id="consistencia" class="form-control">
+                <label for="heces_consistencia">CONSISTENCIA:</label>
+                <select name="consistencia" id="heces_consistencia" class="form-control" required>
                     <option value="" disabled selected>Seleccione consistencia</option>
                     @foreach($consistencias as $key => $value)
                         <option value="{{ $key }}" {{ old('consistencia') == $key ? 'selected' : '' }}>{{ $value }}</option>
@@ -42,72 +42,72 @@
 
                 <br>
 
-                <label for="mucus">MUCUS:</label>
-                <input type="text" name="mucus" id="mucus" class="form-control" placeholder="Ingrese el resultado" value="{{ old('mucus') }}">
+                <label for="heces_mucus">MUCUS:</label>
+                <input type="text" name="mucus" id="heces_mucus" class="form-control" placeholder="Ingrese el resultado" value="{{ old('mucus') }}" required>
                 @error('mucus')
                 <small class="text-danger">{{ $message }}</small>
                 @enderror
 
                 <br>
 
-                <label for="restos_alim_mac">RESTOS ALIMENTICIOS MACROSCOPICOS:</label>
-                <input type="text" name="restos_alim_mac" id="restos_alim_mac" class="form-control" placeholder="Ingrese el resultado" value="{{ old('restos_alim_mac') }}">
+                <label for="heces_restos_alim_mac">RESTOS ALIMENTICIOS MACROSCOPICOS:</label>
+                <input type="text" name="restos_alim_mac" id="heces_restos_alim_mac" class="form-control" placeholder="Ingrese el resultado" value="{{ old('restos_alim_mac') }}" required>
                 @error('restos_alim_mac')
                 <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>
 
             <div class="col-4">
-                <label for="sangre">SANGRE:</label>
-                <input type="text" name="sangre" id="sangre" class="form-control" placeholder="Ingrese el resultado" value="{{ old('sangre') }}">
+                <label for="heces_sangre">SANGRE:</label>
+                <input type="text" name="sangre" id="heces_sangre" class="form-control" placeholder="Ingrese el resultado" value="{{ old('sangre') }}" required>
                 @error('sangre')
                 <small class="text-danger">{{ $message }}</small>
                 @enderror
 
                 <br>
 
-                <label for="leucocitos">LEUCOCITOS:</label>
-                <input type="text" name="leucocitos" id="leucocitos" class="form-control" placeholder="Ingrese el resultado" value="{{ old('leucocitos') }}">
+                <label for="heces_leucocitos">LEUCOCITOS:</label>
+                <input type="text" name="leucocitos" id="heces_leucocitos" class="form-control" placeholder="Ingrese el resultado" value="{{ old('leucocitos') }}" required>
                 @error('leucocitos')
                 <small class="text-danger">{{ $message }}</small>
                 @enderror
 
                 <br>
 
-                <label for="hematies">HEMATIES:</label>
-                <input type="text" name="hematies" id="hematies" class="form-control" placeholder="Ingrese el resultado" value="{{ old('hematies') }}">
+                <label for="heces_hematies">HEMATIES:</label>
+                <input type="text" name="hematies" id="heces_hematies" class="form-control" placeholder="Ingrese el resultado" value="{{ old('hematies') }}" required>
                 @error('hematies')
                 <small class="text-danger">{{ $message }}</small>
                 @enderror
 
                 <br>
 
-                <label for="levadura">LEVADURA:</label>
-                <input type="text" name="levadura" id="levadura" class="form-control" placeholder="Ingrese el resultado" value="{{ old('levadura') }}">
+                <label for="heces_levadura">LEVADURA:</label>
+                <input type="text" name="levadura" id="heces_levadura" class="form-control" placeholder="Ingrese el resultado" value="{{ old('levadura') }}" required>
                 @error('levadura')
                 <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>
 
             <div class="col-4">
-                <label for="restos_alim_mic">RESTOS ALIMENTICIOS MICROSCOPICOS:</label>
-                <input type="text" name="restos_alim_mic" id="restos_alim_mic" class="form-control" placeholder="Ingrese el resultado" value="{{ old('restos_alim_mic') }}">
+                <label for="heces_restos_alim_mic">RESTOS ALIMENTICIOS MICROSCOPICOS:</label>
+                <input type="text" name="restos_alim_mic" id="heces_restos_alim_mic" class="form-control" placeholder="Ingrese el resultado" value="{{ old('restos_alim_mic') }}" required>
                 @error('restos_alim_mic')
                 <small class="text-danger">{{ $message }}</small>
                 @enderror
 
                 <br>
 
-                <label for="parasitos">PARASITOS:</label>
-                <textarea name="parasitos" id="parasitos" rows="3" class="form-control">{{ old('parasitos') }}</textarea>
+                <label for="heces_parasitos">PARASITOS:</label>
+                <textarea name="parasitos" id="heces_parasitos" rows="3" class="form-control" required>{{ old('parasitos') }}</textarea>
                 @error('parasitos')
                 <small class="text-danger">{{ $message }}</small>
                 @enderror
 
                 <br>
 
-                <label for="observaciones">OBSERVACIONES:</label>
-                <textarea name="observaciones" id="observaciones" rows="3" class="form-control">{{ old('observaciones') }}</textarea>
+                <label for="heces_observaciones">OBSERVACIONES:</label>
+                <textarea name="observaciones" id="heces_observaciones" rows="3" class="form-control">{{ old('observaciones') }}</textarea>
                 @error('observaciones')
                 <small class="text-danger">{{ $message }}</small>
                 @enderror

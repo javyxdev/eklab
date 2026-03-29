@@ -13,6 +13,9 @@ use App\Http\Controllers\Admin\ExmOrinaController;
 use App\Http\Controllers\Admin\ExmHemogramaController;
 use App\Http\Controllers\Admin\ExmQuimicaController;
 use App\Http\Controllers\Admin\ExmGenericaController;
+use App\Http\Controllers\Admin\CitaController;
+use App\Http\Controllers\Admin\FacturaController;
+use App\Http\Controllers\Admin\ReporteFacturaController;
 
 Route::get('', [HomeController::class,'index']);
 
@@ -28,6 +31,14 @@ Route::resource('exm_hemograma_plantillas',ExmHemogramaController::class)->names
 Route::resource('exm_orina_plantillas',ExmOrinaController::class)->names('admin.exm_orina_plantillas');
 Route::resource('exm_quimica_plantillas',ExmQuimicaController::class)->names('admin.exm_quimica_plantillas');
 Route::resource('exm_generica_plantillas',ExmGenericaController::class)->names('admin.exm_generica_plantillas');
+Route::resource('citas', CitaController::class)->names('admin.citas');
+
+/** Rutas de Facturación (Definir ANTES del resource para evitar colisión con {id}) */
+Route::get('facturas/getOrdensAjax', [FacturaController::class, 'getOrdensAjax'])->name('admin.facturas.getOrdensAjax');
+Route::post('facturas/{id}/anular',[FacturaController::class,'anular'])->name('admin.facturas.anular');
+Route::get('facturas/{id}/imprimir',[FacturaController::class,'imprimir'])->name('admin.facturas.imprimir');
+Route::post('facturasDelete/{id}',[FacturaController::class,'ajaxDelete']);
+Route::resource('facturas', FacturaController::class)->names('admin.facturas');
 
 /** Rutas de Borrados asíncronos en las bandejas de mantenimiento con DataTable */
 Route::post('categoriaExamensDelete/{id}',[Categoria_ExamensController::class,'ajaxDelete']);
@@ -35,6 +46,10 @@ Route::post('pacientesDelete/{id}',[PacienteController::class,'ajaxDelete']);
 Route::post('municipiosDelete/{id}',[MunicipioController::class,'ajaxDelete']);
 Route::post('barriosDelete/{id}',[BarrioController::class,'ajaxDelete']);
 Route::post('examensDelete/{id}',[ExamenController::class,'ajaxDelete']);
+
+/** Rutas de Reportes de Facturación */
+Route::get('reportes/facturacion', [ReporteFacturaController::class, 'diario'])->name('admin.reportes.facturacion.diario');
+Route::get('reportes/facturacion/imprimir', [ReporteFacturaController::class, 'imprimirDiario'])->name('admin.reportes.facturacion.imprimir');
 
 /** Rutas internas de dropdowns asíncronos dependientes */
 Route::get('pacientes/getMunicipiosByDepartamento/{id}',[PacienteController::class,'getMunicipiosByDepartamento']);
@@ -46,11 +61,14 @@ Route::get('ordens/getPacienteById/{id}',[OrdenController::class,'getPacienteByI
 Route::get('ordens/getExamenById/{id}',[OrdenController::class,'getExamenById']);
 Route::post('ordens/totalizarOrden',[OrdenController::class,'totalizarOrden']);
 Route::post('ordens/procesarOrden',[OrdenController::class,'procesarOrden']);
+Route::post('ordens/updateOrden',[OrdenController::class,'updateOrden']);
+Route::get('ordens/{orden}/modificarOrden',[OrdenController::class,'modificarOrden'])->name('admin.ordens.modificarOrden');
 Route::post('anularOrden/{id}',[OrdenController::class,'anularOrden']);
 Route::post('ordens/{id}/finalizarOrden',[OrdenController::class,'finalizarOrden']);
+Route::get('ordens/{id}/imprimirHojaTrabajo',[OrdenController::class,'imprimirHojaTrabajo'])->name('admin.ordens.imprimirHojaTrabajo');
+Route::get('ordens/{id}/imprimirResultados',[OrdenController::class,'imprimirResultados'])->name('admin.ordens.imprimirResultados');
+Route::get('ordens/getTemplateData/{plantilla}/{deta_orden_id}',[OrdenController::class,'getTemplateData']);
 
-
-
-
-
-
+/** Rutas de Citas */
+Route::get('getEvents', [CitaController::class, 'getEvents'])->name('admin.citas.getEvents');
+Route::post('citas/{cita}/convert-to-order', [CitaController::class, 'convertToOrder'])->name('admin.citas.convertToOrder');

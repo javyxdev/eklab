@@ -2,15 +2,31 @@
 
 @section('title', 'EK Diagnostico')
 
+@section('css')
+    <style>
+        /* Reducción del font general de la tabla en un 20% */
+        #examensTable {
+            font-size: 0.8rem !important;
+        }
+        #examensTable td, #examensTable th {
+            padding: 0.5rem !important;
+            vertical-align: middle !important;
+        }
+    </style>
+@stop
+
 @section('content_header')
-    <h1><i class="fa fa-vial"></i> Mantenimiento de Examenes</h1>
-    <p>Listado de examenes individuales disponibles.</p>
+    <h1><i class="fa fa-vial"></i> Mantenimiento de Exámenes</h1>
+    <p>Listado de exámenes individuales disponibles.</p>
 @stop
 
 @section('content')
     @if(session('info'))
-        <div class="alert alert-warning">
-            <strong>{{session('info')}}</strong>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong><i class="fas fa-check-circle"></i> {{session('info')}}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
     @endif
     <div class="card">
@@ -18,16 +34,15 @@
             <a class="btn btn-primary" href="{{route('admin.examens.create')}}"><i class="fa fa-vial fa-fw"></i> NUEVO EXAMEN</a>
         </div>
         <div class="card-body">
-            <table id="examensTable" class="table table-striped">
+            <table id="examensTable" class="table table-striped table-bordered table-hover">
                 <thead>
                 <tr>
                     <th>ID</th>
                     <th>NOMBRE DEL EXAMEN</th>
-                    <th>CATEGORIA / AREA</th>
+                    <th>CATEGORÍA / ÁREA</th>
                     <th>PRECIO</th>
                     <th>PLANTILLA</th>
-                    <th>EDITAR</th>
-                    <th>ELIMINAR</th>
+                    <th class="text-center">ACCIONES</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -38,17 +53,15 @@
                         <td>{{$examen->categoria_examen->descripcion}}</td>
                         <td>${{$examen->precio}}</td>
                         <td>{{$examen->plantilla}}</td>
-                        <td width="75px">
-                            <a class="btn btn-success btn-sm" href="{{route('admin.examens.edit', $examen)}}">
-                                <i class="fa fa-pen fa-sm fa-fw"></i>
-                                <small>EDITAR</small>
-                            </a>
-                        </td>
-                        <td width="90px">
-                            <button class="btn btn-danger btn-sm" onclick="eliminarRegistro({{$examen->id}})">
-                                <i class="fa fa-trash-alt fa-sm fa-fw"></i>
-                                <small>ELIMINAR</small>
-                            </button>
+                        <td width="100px" class="text-center">
+                            <div class="btn-group">
+                                <a class="btn btn-success btn-sm" href="{{route('admin.examens.edit', $examen)}}" title="Editar Examen">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <button class="btn btn-danger btn-sm" onclick="eliminarRegistro({{$examen->id}})" title="Eliminar Examen">
+                                    <i class="fa fa-trash-alt"></i>
+                                </button>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
@@ -58,13 +71,28 @@
     </div>
 @stop
 
-@section('css')
-    <link rel="stylesheet" href="#">
-@stop
-
 @section('js')
     <script>
-        $('#examensTable').DataTable();
+        $('#examensTable').DataTable({
+            "responsive": true,
+            "autoWidth": false,
+            "language": {
+                "sProcessing":     "Procesando...",
+                "sLengthMenu":     "Mostrar _MENU_ registros",
+                "sZeroRecords":    "No se encontraron resultados",
+                "sEmptyTable":     "Ningún dato disponible en esta tabla",
+                "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                "sSearch":         "Buscar:",
+                "oPaginate": {
+                    "sFirst":    "Primero",
+                    "sLast":     "Último",
+                    "sNext":     "Siguiente",
+                    "sPrevious": "Anterior"
+                }
+            }
+        });
 
         function eliminarRegistro(id){
             $.ajaxSetup({
@@ -75,23 +103,22 @@
             Swal.fire({
                 title: '¿Esta seguro que desea eliminar el registro?',
                 text: "¡No es posible revertir esta operación!",
-                type: 'warning',
+                icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Borrar registro!',
+                confirmButtonText: 'Sí, borrar!',
                 cancelButtonText: 'Cancelar',
             }).then((result) => {
-                if (result.value === true) {
+                if (result.value) {
                     $.ajax({
-                        url:'categoriaExamensDelete/'+id,
+                        url:'examensDelete/'+id,
                         type:'post',
                         success: function (response) {
                             swal.fire({
                                 title: '¡Eliminado!',
                                 text: response,
-                                type: 'success',
-                                showCancelButton: false,
+                                icon: 'success',
                                 confirmButtonColor: '#3085d6',
                                 confirmButtonText: 'OK',
                             }).then((result) => { location.reload(); });
@@ -107,4 +134,3 @@
 
     </script>
 @stop
-

@@ -26,19 +26,52 @@
     <script>
         /** Calculo automático de edad al cargar la pagina */
         $(document).ready(function(){
+            controlarIngresoManual();
+
             var fechaNacimiento = $('#fecha_nacimiento').val();
-            if(fechaNacimiento !== ''){
+            if(fechaNacimiento !== '' && !$('#sin_dui').is(':checked')){
                 var edad = getEdad(fechaNacimiento);
                 $('#edad').val(edad);
-            }else{
-                $('#edad').val('');
             }
+        });
+
+        /** Control de checkbox Sin DUI */
+        $('#sin_dui').change(function(){
+            controlarIngresoManual();
+        });
+
+        function controlarIngresoManual(){
+            if($('#sin_dui').is(':checked')){
+                $('#edad').prop('disabled', false);
+                $('#dui').val('').prop('disabled', true);
+            } else {
+                $('#edad').prop('disabled', true);
+                $('#dui').prop('disabled', false);
+                // Recalcular edad si hay fecha
+                var fechaNacimiento = $('#fecha_nacimiento').val();
+                if(fechaNacimiento !== ''){
+                    $('#edad').val(getEdad(fechaNacimiento));
+                }
+            }
+        }
+
+        /** Habilitar campos disabled antes de enviar el formulario */
+        $('form').submit(function() {
+            $('#edad').prop('disabled', false);
+            $('#dui').prop('disabled', false);
         });
 
         /** Calculo de edad a partir del cambio en la fecha de nacimiento */
         $('#fecha_nacimiento').change(function(){
-            var edad = getEdad($(this).val());
-            $('#edad').val(edad);
+            if(!$('#sin_dui').is(':checked')){
+                var fecha = $(this).val();
+                if(fecha !== ''){
+                    var edad = getEdad(fecha);
+                    $('#edad').val(edad);
+                } else {
+                    $('#edad').val('');
+                }
+            }
         });
 
         /** Función para cálculo de edad */

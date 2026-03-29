@@ -9,12 +9,18 @@ class Exm_generica_plantilla extends Model
 {
     use HasFactory;
 
-    public $table = "exm_generica_plantilla";
+    protected $table = "exm_generica_plantillas";
 
     protected $guarded = [];
 
-    //Relaciones Many To One
-    public function Examen(){
+    // Relaciones Many To One
+    public function examen()
+    {
         return $this->belongsTo(Examen::class);
+    }
+
+    public function deta_orden()
+    {
+        return $this->belongsTo(Deta_orden::class);
     }
 }

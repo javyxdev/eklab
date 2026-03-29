@@ -37,12 +37,23 @@ class ExmQuimicaController extends Controller
      */
     public function store(Request $request)
     {
-        $resultado = Exm_quimica_plantilla::create($request->all());
+        $request->validate([
+            'examen_id' => 'required',
+            'deta_orden_id' => 'required',
+            'prueba' => 'required|string|max:50',
+            'resultado' => 'required|string|max:75',
+            'observaciones' => 'nullable|string|max:300',
+        ]);
+
+        $resultado = Exm_quimica_plantilla::updateOrCreate(
+            ['deta_orden_id' => $request->deta_orden_id],
+            $request->all()
+        );
         $deta_orden = Deta_orden::Find($resultado->deta_orden_id);
         $deta_orden->completado = 1;
         $deta_orden->update();
 
-        $mensaje = 'El examen '.$deta_orden->examen->descripcion.' se completó con éxito.';
+        $mensaje = 'El examen '.$deta_orden->examen->descripcion.' se guardó con éxito.';
 
         return redirect()->back()->with('info',$mensaje);
     }

@@ -53,13 +53,17 @@ class PacienteController extends Controller
             'nombre' => 'required',
             'apellido' => 'required',
             'genero' => 'required',
-            'fecha_nacimiento' => 'required',
-            'dui' => 'max:9',
-            'telefono' => 'numeric|min:8',
+            'fecha_nacimiento' => 'nullable',
+            'edad' => 'required|numeric',
+            'dui' => 'nullable|string|max:10',
+            'telefono' => 'nullable|numeric|min:8',
+            'email' => 'nullable|email',
             'departamento_id' => 'required',
+            'municipio_id' => 'nullable',
+            'barrio_id' => 'nullable',
         ]);
         $mensaje = 'El registro se guardó con éxito.';
-        $paciente = Paciente::create($request->all());
+        $paciente = Paciente::create($request->except('sin_dui'));
         return redirect()->route('admin.pacientes.edit',compact('paciente'))->with('info',$mensaje);
     }
 
@@ -104,14 +108,18 @@ class PacienteController extends Controller
         $request->validate([
             'nombre' => 'required',
             'apellido' => 'required',
-            'fecha_nacimiento' => 'required',
-            'dui' => 'max:9',
-            'telefono' => 'numeric|min:8',
+            'genero' => 'required',
+            'fecha_nacimiento' => 'nullable',
+            'edad' => 'required|numeric',
+            'dui' => 'nullable|string|max:10',
+            'telefono' => 'nullable|numeric|min:8',
+            'email' => 'nullable|email',
             'departamento_id' => 'required',
-
+            'municipio_id' => 'nullable',
+            'barrio_id' => 'nullable',
         ]);
         $mensaje = 'El registro se actualizó con éxito.';
-        $paciente->update($request->all());
+        $paciente->update($request->except('sin_dui'));
         return redirect()->route('admin.pacientes.edit',$paciente)->with('info',$mensaje);
     }
 

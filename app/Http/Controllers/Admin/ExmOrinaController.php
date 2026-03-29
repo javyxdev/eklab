@@ -37,12 +37,44 @@ class ExmOrinaController extends Controller
      */
     public function store(Request $request)
     {
-        $resultado = Exm_orina_plantilla::create($request->all());
+        $request->validate([
+            'examen_id' => 'required',
+            'deta_orden_id' => 'required',
+            'color' => 'required|string|max:25',
+            'aspecto' => 'required|string|max:25',
+            'densidad' => 'required|string|max:25',
+            'ph' => 'required|string|max:25',
+            'proteinas' => 'required|string|max:25',
+            'glucosa' => 'required|string|max:25',
+            'sangre_oculta' => 'required|string|max:25',
+            'cuerpos_cetonicos' => 'required|string|max:25',
+            'urobilinogeno' => 'required|string|max:25',
+            'bilirrubina' => 'required|string|max:25',
+            'nitritos' => 'required|string|max:25',
+            'hemoglobina' => 'required|string|max:25',
+            'esterasa_leucocitaria' => 'required|string|max:25',
+            'hematies' => 'required|string|max:25',
+            'leucocitos' => 'required|string|max:25',
+            'celulas_epiteliales' => 'required|string|max:25',
+            'filamentos_mucoides' => 'required|string|max:25',
+            'bacterias' => 'required|string|max:25',
+            'cil_granulosos' => 'required|string|max:25',
+            'cil_leucocitario' => 'required|string|max:25',
+            'cil_hematicos' => 'required|string|max:25',
+            'cil_hialianos' => 'required|string|max:25',
+            'cil_cereos' => 'required|string|max:25',
+            'observaciones' => 'nullable|string|max:300',
+        ]);
+
+        $resultado = Exm_orina_plantilla::updateOrCreate(
+            ['deta_orden_id' => $request->deta_orden_id],
+            $request->all()
+        );
         $deta_orden = Deta_orden::Find($resultado->deta_orden_id);
         $deta_orden->completado = 1;
         $deta_orden->update();
 
-        $mensaje = 'El examen '.$deta_orden->examen->descripcion.' se completó con éxito.';
+        $mensaje = 'El examen '.$deta_orden->examen->descripcion.' se guardó con éxito.';
 
         return redirect()->back()->with('info',$mensaje);
     }

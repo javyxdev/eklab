@@ -17,51 +17,59 @@
             <div class="row">
                 <input type="hidden" id="orden_id" value="{{ $orden->id }}">
 
-                <div class="form-group col-4">
+                <div class="form-group col-12 col-md-4">
                     <label>PACIENTE:</label>
                     <input type="text" class="form-control" id="paciente"
                            value="{{ $orden->paciente->apellido }}, {{ $orden->paciente->nombre }}" disabled>
                 </div>
-                <div class="form-group col-1">
+                <div class="form-group col-6 col-md-2 col-lg-1">
                     <label>GÉNERO:</label>
                     <input type="text" class="form-control" id="genero" value="{{ $orden->paciente->genero }}" disabled>
                 </div>
-                <div class="form-group col-2">
+                <div class="form-group col-6 col-md-3 col-lg-2">
                     <label>FECHA NACIMIENTO:</label>
                     <input type="text" class="form-control" id="fechaNac" value="{{ $orden->paciente->fecha_nacimiento }}"
                            disabled>
                 </div>
-                <div class="form-group col-1">
+                <div class="form-group col-6 col-md-2 col-lg-1">
                     <label>EDAD:</label>
                     <input type="text" class="form-control" id="edad" disabled>
                 </div>
-                <div class="form-group col-2">
+                <div class="form-group col-6 col-md-3 col-lg-2">
                     <label>DUI:</label>
                     <input type="text" class="form-control" id="dui" value="{{ $orden->paciente->dui }}" disabled>
                 </div>
-                <div class="form-group col-2">
+                <div class="form-group col-12 col-md-3 col-lg-2">
                     <label>TELÉFONO:</label>
                     <input type="text" class="form-control" id="telefono" value="{{ $orden->paciente->telefono }}" disabled>
                 </div>
             </div>
 
             <div class="row">
-                <div class="form-group col-2">
+                <div class="form-group col-6 col-md-3 col-lg-2">
                     <label>ESTADO:</label>
                     <input type="text" class="form-control" id="estado" value="{{ $orden->estado }}" disabled>
                 </div>
-                <div class="form-group col-2">
+                <div class="form-group col-6 col-md-3 col-lg-2">
                     <label>FECHA DE LA ORDEN:</label>
                     <input type="text" class="form-control" id="fechaOrden" value="{{ $orden->created_at }}" disabled>
                 </div>
-                <div class="form-group col-2">
+                <div class="form-group col-6 col-md-3 col-lg-2">
                     <label>TOTAL DE ORDEN:</label>
                     <input type="text" class="form-control" id="total" value="${{ $orden->total }}" disabled>
                 </div>
-                <div class="form-group col-2">
+                <div class="form-group col-12 col-md-6 col-lg-4">
                     <label>ACCIONES:</label>
-                    <button class="btn btn-primary" onclick="printOrder()"><i class="fa fa-print fa-fw"></i> IMPRIMIR
-                        ORDEN</button>
+                    <div class="d-flex flex-wrap gap-2">
+                        <button class="btn btn-primary mb-2 mr-2" onclick="printOrder()">
+                            <i class="fa fa-print fa-fw"></i> IMPRIMIR HOJA
+                        </button>
+                        @if($orden->estado == 'EN PROCESO')
+                            <a href="{{ route('admin.ordens.modificarOrden', $orden->id) }}" class="btn btn-success mb-2">
+                                <i class="fa fa-edit fa-fw"></i> EDITAR ORDEN
+                            </a>
+                        @endif
+                    </div>
                 </div>
             </div>
 
@@ -82,7 +90,7 @@
                             <th>No.EXM</th>
                             <th>EXAMEN</th>
                             <th>PLANTILLA</th>
-                            <th>COMPLETAR</th>
+                            <th>ACCION</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -92,13 +100,23 @@
                                 <td>{{ $detaOrden->examen->descripcion }}</td>
                                 <td>{{ $detaOrden->examen->plantilla }}</td>
                                 <td>
-                                    @if($detaOrden->completado == 0)
-                                        <button class="btn btn-dark btn-sm" onclick="desliegaPlantilla({{ $detaOrden->id }}, {{ $detaOrden->examen->id }}, '{{ $detaOrden->examen->plantilla }}', '{{ $detaOrden->examen->descripcion }}', '{{ $detaOrden->examen->unidad_med }}', '{{ $detaOrden->examen->rango_ref }}')">
-                                            <i class="fa fa-check-circle fa-sm fa-fw"></i>
-                                            COMPLETAR ORDEN
-                                        </button>
+                                    @if($orden->estado == 'EN PROCESO')
+                                        @if($detaOrden->completado == 0)
+                                            <button class="btn btn-dark btn-sm" onclick="desliegaPlantilla({{ $detaOrden->id }}, {{ $detaOrden->examen->id }}, '{{ $detaOrden->examen->plantilla }}', '{{ $detaOrden->examen->descripcion }}', '{{ $detaOrden->examen->unidad_med }}', '{{ $detaOrden->examen->rango_ref }}')">
+                                                <i class="fa fa-check-circle fa-sm fa-fw"></i>
+                                                COMPLETAR
+                                            </button>
+                                        @else
+                                            <button class="btn btn-success btn-sm" onclick="desliegaPlantilla({{ $detaOrden->id }}, {{ $detaOrden->examen->id }}, '{{ $detaOrden->examen->plantilla }}', '{{ $detaOrden->examen->descripcion }}', '{{ $detaOrden->examen->unidad_med }}', '{{ $detaOrden->examen->rango_ref }}')">
+                                                <i class="fa fa-edit fa-sm fa-fw"></i>
+                                                EDITAR
+                                            </button>
+                                        @endif
                                     @else
-                                        <i class="fa fa-check-circle fa-sm fa-fw"></i>
+                                        <button class="btn btn-info btn-sm" onclick="desliegaPlantilla({{ $detaOrden->id }}, {{ $detaOrden->examen->id }}, '{{ $detaOrden->examen->plantilla }}', '{{ $detaOrden->examen->descripcion }}', '{{ $detaOrden->examen->unidad_med }}', '{{ $detaOrden->examen->rango_ref }}')">
+                                            <i class="fa fa-search fa-sm fa-fw"></i>
+                                            CONSULTAR
+                                        </button>
                                     @endif
                                 </td>
                             </tr>
@@ -108,10 +126,12 @@
                 </div>
             </div>
 
-            <div class="form-control col-12 text-center mt-3">
-                <button id="btnProcesar" class="btn btn-success" onclick="finalizarOrden()"><i
-                        class="fa fa-check-circle fa-fw"></i> FINALIZAR ORDEN</button>
-            </div>
+            @if($orden->estado == 'EN PROCESO')
+                <div class="col-12 text-center mt-3">
+                    <button id="btnProcesar" class="btn btn-success" onclick="finalizarOrden()"><i
+                            class="fa fa-check-circle fa-fw"></i> FINALIZAR ORDEN</button>
+                </div>
+            @endif
 
         </div>
     </div>
@@ -137,8 +157,8 @@
             if ('{{ $orden->estado }}' === 'ANULADO') {
                 Swal.fire('ORDEN ANULADA', 'No es posible completar una orden anulada', 'error');
                 $("#btnProcesar").prop('disabled', true);
-            } else if ('{{ $orden->estado }}' === 'COMPLETADA') {
-                Swal.fire('ORDEN COMPLETADA', 'Esta orden ha sido completada, solo puede consultarla.', 'warning');
+            } else if ('{{ $orden->estado }}' === 'COMPLETADO') {
+                Swal.fire('ORDEN COMPLETADO', 'Esta orden ha sido completado, solo puede consultarla.', 'warning');
                 $("#btnProcesar").prop('disabled', true);
             }
         });
@@ -164,14 +184,14 @@
             Swal.fire({
                 title: '¿Está seguro que desea finalizar la Orden?',
                 text: "¡No es posible revertir esta operación!",
-                icon: 'warning',
+                type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Finalizar Orden',
                 cancelButtonText: 'Cancelar',
             }).then((result) => {
-                if (result.isConfirmed) {
+                if (result.value) {
                     $.ajax({
                         url: 'finalizarOrden',
                         type: 'post',
@@ -186,10 +206,13 @@
                             Swal.fire({
                                 title: responseTitle,
                                 text: responseMsg,
-                                icon: responseType,
+                                type: responseType,
                                 confirmButtonColor: '#3085d6',
                                 confirmButtonText: 'OK',
                             }).then(() => {
+                                if (responseParts[0] === "0") {
+                                    window.open("/admin/ordens/" + id + "/imprimirResultados", "_blank");
+                                }
                                 location.reload();
                             });
                         },
@@ -202,46 +225,139 @@
         }
 
         function printOrder() {
-            window.print();
+            let id = $("#orden_id").val();
+            window.open("/admin/ordens/" + id + "/imprimirHojaTrabajo", "_blank");
         }
 
         function desliegaPlantilla(detaOrdenId, examenId, plantilla, nombrePrueba, unidadMed, rangoRef) {
-            switch (plantilla) {
-                case 'EGH':
-                    $("#exmHeces").modal('toggle');
-                    $("#tituloCoprologia").empty().append("Plantilla de Coprología: " + nombrePrueba);
-                    $("#id_exm_heces").val(examenId);
-                    $("#id_deta_prueba_heces").val(detaOrdenId);
-                    break;
-                case 'EGO':
-                    $("#exmOrina").modal('toggle');
-                    $("#tituloUroanalisis").empty().append("Plantilla de Uroanálisis: " + nombrePrueba);
-                    $("#id_exm_orina").val(examenId);
-                    $("#id_deta_prueba_orina").val(detaOrdenId);
-                    break;
-                case 'HMG':
-                    $("#exmHemograma").modal('toggle');
-                    $("#tituloHematologia").empty().append("Plantilla de Hematología: " + nombrePrueba);
-                    $("#id_exm_hemograma").val(examenId);
-                    $("#id_deta_prueba_hemograma").val(detaOrdenId);
-                    break;
-                case 'QMV':
-                    $("#exmQuimica").modal('toggle');
-                    $("#tituloQuimica").empty().append("Plantilla de Pruebas Químicas / Varias: " + nombrePrueba);
-                    $("#id_exm_quimica").val(examenId);
-                    $("#id_deta_prueba_quimica").val(detaOrdenId);
-                    $("#prueba").val(nombrePrueba);
-                    $("#unidadMedida").val(unidadMed);
-                    $("#rangoRef").val(rangoRef);
-                    break;
-                case 'GEN':
-                    $("#exmGenerico").modal('toggle');
-                    $("#tituloGenerico").empty().append("Plantilla de Pruebas Genéricas: " + nombrePrueba);
-                    $("#id_exm_generico").val(examenId);
-                    $("#id_deta_prueba_generico").val(detaOrdenId);
-                    $("#prueba_generico").val(nombrePrueba);
-                    break;
+            // Limpiar formularios antes de llenar
+            $('form').trigger("reset");
+            
+            // Si el estado no es EN PROCESO, deshabilitar inputs y ocultar botones de guardar
+            if ('{{ $orden->estado }}' !== 'EN PROCESO') {
+                $('form input, form select, form textarea').prop('disabled', true);
+                $('.modal-footer .btn-success').hide();
+            } else {
+                $('form input, form select, form textarea').prop('disabled', false);
+                $('.modal-footer .btn-success').show();
+                // Mantener IDs bloqueados
+                $('#id_exm_heces, #id_deta_prueba_heces, #id_exm_orina, #id_deta_prueba_orina, #id_exm_hemograma, #id_deta_prueba_hemograma, #id_exm_quimica, #id_deta_prueba_quimica, #id_exm_generico, #id_deta_prueba_generico, #qmv_prueba, #unidadMedida, #rangoRef, #prueba_generico').prop('readonly', true);
             }
+
+            $.ajax({
+                url: '{{ url("admin/ordens/getTemplateData") }}/' + plantilla + '/' + detaOrdenId,
+                type: 'get',
+                success: function(data) {
+                    switch (plantilla) {
+                        case 'EGH':
+                            $("#exmHeces").modal('toggle');
+                            $("#tituloCoprologia").empty().append("Plantilla de Coprología: " + nombrePrueba);
+                            $("#id_exm_heces").val(examenId);
+                            $("#id_deta_prueba_heces").val(detaOrdenId);
+                            if (data) {
+                                $("#heces_color").val(data.color);
+                                $("#heces_consistencia").val(data.consistencia);
+                                $("#heces_mucus").val(data.mucus);
+                                $("#heces_restos_alim_mac").val(data.restos_alim_mac);
+                                $("#heces_sangre").val(data.sangre);
+                                $("#heces_leucocitos").val(data.leucocitos);
+                                $("#heces_hematies").val(data.hematies);
+                                $("#heces_levadura").val(data.levadura);
+                                $("#heces_restos_alim_mic").val(data.restos_alim_mic);
+                                $("#heces_parasitos").val(data.parasitos);
+                                $("#heces_observaciones").val(data.observaciones);
+                            }
+                            break;
+                        case 'EGO':
+                            $("#exmOrina").modal('toggle');
+                            $("#tituloUroanalisis").empty().append("Plantilla de Uroanálisis: " + nombrePrueba);
+                            $("#id_exm_orina").val(examenId);
+                            $("#id_deta_prueba_orina").val(detaOrdenId);
+                            if (data) {
+                                $("#orina_color").val(data.color);
+                                $("#orina_aspecto").val(data.aspecto);
+                                $("#orina_densidad").val(data.densidad);
+                                $("#orina_ph").val(data.ph);
+                                $("#orina_proteinas").val(data.proteinas);
+                                $("#orina_glucosa").val(data.glucosa);
+                                $("#orina_sangre_oculta").val(data.sangre_oculta);
+                                $("#orina_cuerpos_cetonicos").val(data.cuerpos_cetonicos);
+                                $("#orina_urobilinogeno").val(data.urobilinogeno);
+                                $("#orina_bilirrubina").val(data.bilirrubina);
+                                $("#orina_nitritos").val(data.nitritos);
+                                $("#orina_hemoglobina").val(data.hemoglobina);
+                                $("#orina_esterasa_leucocitaria").val(data.esterasa_leucocitaria);
+                                $("#orina_hematies").val(data.hematies);
+                                $("#orina_leucocitos").val(data.leucocitos);
+                                $("#orina_celulas_epiteliales").val(data.celulas_epiteliales);
+                                $("#orina_filamentos_mucoides").val(data.filamentos_mucoides);
+                                $("#orina_bacterias").val(data.bacterias);
+                                $("#orina_cil_granulosos").val(data.cil_granulosos);
+                                $("#orina_cil_leucocitario").val(data.cil_leucocitario);
+                                $("#orina_cil_hematicos").val(data.cil_hematicos);
+                                $("#orina_cil_hialianos").val(data.cil_hialianos);
+                                $("#orina_cil_cereos").val(data.cil_cereos);
+                                $("#orina_observaciones").val(data.observaciones);
+                            }
+                            break;
+                        case 'HMG':
+                            $("#exmHemograma").modal('toggle');
+                            $("#tituloHematologia").empty().append("Plantilla de Hematología: " + nombrePrueba);
+                            $("#id_exm_hemograma").val(examenId);
+                            $("#id_deta_prueba_hemograma").val(detaOrdenId);
+                            if (data) {
+                                $("#hmg_globulos_rojos").val(data.globulos_rojos);
+                                $("#hmg_hemoglobina").val(data.hemoglobina);
+                                $("#hmg_hematocrito").val(data.hematocrito);
+                                $("#hmg_vcm").val(data.vcm);
+                                $("#hmg_hcm").val(data.hcm);
+                                $("#hmg_chcm").val(data.chcm);
+                                $("#hmg_leucocitos").val(data.leucocitos);
+                                $("#hmg_neutrofilos_segmentados").val(data.neutrofilos_segmentados);
+                                $("#hmg_neutrofilos_en_banda").val(data.neutrofilos_en_banda);
+                                $("#hmg_linfocitos").val(data.linfocitos);
+                                $("#hmg_monocitos").val(data.monocitos);
+                                $("#hmg_eosinofilos").val(data.eosinofilos);
+                                $("#hmg_basofilos").val(data.basofilos);
+                                $("#hmg_recuento_plaquetas").val(data.recuento_plaquetas);
+                                $("#hmg_observaciones").val(data.observaciones);
+                            }
+                            break;
+                        case 'QMV':
+                            $("#exmQuimica").modal('toggle');
+                            $("#tituloQuimica").empty().append("Plantilla de Pruebas Químicas / Varias: " + nombrePrueba);
+                            $("#id_exm_quimica").val(examenId);
+                            $("#id_deta_prueba_quimica").val(detaOrdenId);
+                            $("#qmv_prueba").val(nombrePrueba);
+                            $("#unidadMedida").val(unidadMed);
+                            $("#rangoRef").val(rangoRef);
+                            if (data) {
+                                $("#qmv_resultado").val(data.resultado);
+                                $("#qmv_observaciones").val(data.observaciones);
+                            }
+                            break;
+                        case 'GEN':
+                            $("#exmGenerico").modal('toggle');
+                            $("#tituloGenerico").empty().append("Plantilla de Pruebas Genéricas: " + nombrePrueba);
+                            $("#id_exm_generico").val(examenId);
+                            $("#id_deta_prueba_generico").val(detaOrdenId);
+                            $("#prueba_generico").val(nombrePrueba);
+                            if (data) {
+                                for (let i = 1; i <= 5; i++) {
+                                    $("#gen_param_" + i).val(data["param_" + i]);
+                                    $("#gen_resultado_" + i).val(data["resultado_" + i]);
+                                    $("#gen_unidad_med_" + i).val(data["unidad_med_" + i]);
+                                    $("#gen_rango_ref_" + i).val(data["rango_ref_" + i]);
+                                }
+                                $("#gen_observaciones").val(data.observaciones);
+                            }
+                            break;
+                    }
+                },
+                error: function (x, e, thrownError) {
+                    Swal.fire("Error", "No se pudieron obtener los resultados previos.", "error");
+                }
+            });
         }
     </script>
 @stop
